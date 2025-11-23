@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddxxjd6ximr3a"]
+
+[ext_resource type="Script" uid="uid://dth721ys1yvsb" path="res://scripts/room.gd" id="1_lb5by"]
+[ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_v0oeq"]
+[ext_resource type="Script" uid="uid://cjgnkfaqn7rkn" path="res://scripts/camera_lock.gd" id="3_lb5by"]
+
+[sub_resource type="Environment" id="Environment_v0oeq"]
+background_mode = 1
+background_color = Color(0.334628, 0.2773, 0.59, 1)
+
+[sub_resource type="Gradient" id="Gradient_bmbfo"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v0oeq"]
+gradient = SubResource("Gradient_bmbfo")
+width = 100
+height = 100
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dryon"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lb5by"]
+
+[node name="room_01" type="Node3D"]
+script = ExtResource("1_lb5by")
+metadata/_custom_type_script = "uid://dth721ys1yvsb"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v0oeq")
+
+[node name="main_layer" type="Node3D" parent="."]
+
+[node name="assets" type="Node3D" parent="main_layer"]
+
+[node name="Sprite3D" type="Sprite3D" parent="main_layer/assets"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+modulate = Color(0, 0, 0, 1)
+alpha_cut = 3
+texture = SubResource("GradientTexture2D_v0oeq")
+
+[node name="collisions" type="StaticBody3D" parent="main_layer"]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="main_layer/collisions"]
+polygon = PackedVector2Array(-5, -1, 5, -1, 5, -2, -5, -2)
+debug_color = Color(0, 1, 0.25098, 1)
+debug_fill = false
+
+[node name="exit_01" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1, 0)
+script = ExtResource("2_v0oeq")
+room_path = "res://scenes/world.tscn"
+metadata/_custom_type_script = "uid://k57qdfkfd1xt"
+
+[node name="hitbox" type="CollisionShape3D" parent="exit_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_dryon")
+
+[node name="exit_02" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -1, 0)
+script = ExtResource("2_v0oeq")
+index = 1
+direction = 1
+room_path = "res://scenes/world.tscn"
+room_entry_index = 1
+metadata/_custom_type_script = "uid://k57qdfkfd1xt"
+
+[node name="hitbox" type="CollisionShape3D" parent="exit_02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_dryon")
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
+top_level = true
+projection = 1
+size = 15.8458
+
+[node name="camera_lock" type="Area3D" parent="."]
+script = ExtResource("3_lb5by")
+metadata/_custom_type_script = "uid://cjgnkfaqn7rkn"
+
+[node name="hitbox" type="CollisionShape3D" parent="camera_lock"]
+shape = SubResource("BoxShape3D_lb5by")

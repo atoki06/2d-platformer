@@ -1,0 +1,1353 @@
+[gd_scene load_steps=11 format=3 uid="uid://ddxxjd6ximr3a"]
+
+[ext_resource type="Script" uid="uid://8gtxpiete45" path="res://scripts/room.gd" id="1_cyfwn"]
+[ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_v0oeq"]
+[ext_resource type="Script" uid="uid://b24ivokgh0wnq" path="res://scripts/parallax.gd" id="3_cyfwn"]
+[ext_resource type="Texture2D" uid="uid://cr3wrwtckq8ol" path="res://2d_assets/environment/ruins/brick_wall_tile_1.png" id="3_dryon"]
+[ext_resource type="Texture2D" uid="uid://by8od7g0027si" path="res://2d_assets/environment/ruins/brick_ground_tile_1.png" id="5_cyfwn"]
+[ext_resource type="Shader" uid="uid://dsgk4bqh6mfic" path="res://shader/black_gradient.gdshader" id="6_3g1tf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb5by"]
+size = Vector2(2071, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
+size = Vector2(222.5, 190)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g1tf"]
+size = Vector2(222.5, 190)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1hoc"]
+shader = ExtResource("6_3g1tf")
+
+[node name="room_01" type="Node2D" groups=["room"]]
+position = Vector2(0, -12.1666)
+script = ExtResource("1_cyfwn")
+margin_min = Vector2(-1.68, -5.22)
+margin_max = Vector2(1.96, -0.17)
+
+[node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
+visible = false
+
+[node name="CollisionPolygon3D" type="CollisionPolygon2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+polygon = PackedVector2Array(684, 34, 687, -192, 665, -253, 662, -649, 916, -687, 994, 48)
+
+[node name="CollisionPolygon3D2" type="CollisionPolygon2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+position = Vector2(-1165, -27)
+polygon = PackedVector2Array(524, -654, 538, -214, 562, -159, 569, 63, 265, 59, 268, -673)
+
+[node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
+visible = false
+modulate = Color(0.37, 0.643, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+position = Vector2(18.5, 366)
+shape = SubResource("RectangleShape2D_lb5by")
+
+[node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
+visible = false
+position = Vector2(-914, 287)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_v0oeq")
+room_path = "res://scenes/room_01.tscn"
+room_entry_index = 1
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_01"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -122)
+shape = SubResource("RectangleShape2D_dryon")
+
+[node name="exit_02" type="Area2D" parent="." groups=["collision", "exit"]]
+visible = false
+position = Vector2(999, 290)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_v0oeq")
+index = 1
+direction = 1
+room_path = "res://scenes/room_01.tscn"
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_02"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -122)
+shape = SubResource("RectangleShape2D_3g1tf")
+
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+modulate = Color(0.25, 0.25, 0.25, 1)
+z_index = -1
+position = Vector2(17.0047, 108.922)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("3_cyfwn")
+size = 0.6
+layer = -3
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_16" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_17" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_18" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_19" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_20" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_21" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_22" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_23" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_24" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_25" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_26" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_27" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_28" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_29" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_30" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_31" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_32" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_33" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_34" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_35" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_36" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_38" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_39" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_41" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_42" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_43" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_45" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_46" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_47" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_48" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_49" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_50" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_51" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_52" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_53" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_54" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_55" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_56" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_57" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_58" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_59" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_60" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_61" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_62" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_63" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_64" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_65" type="Sprite2D" parent="background_2"]
+position = Vector2(82.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_66" type="Sprite2D" parent="background_2"]
+position = Vector2(372.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_67" type="Sprite2D" parent="background_2"]
+position = Vector2(657.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_68" type="Sprite2D" parent="background_2"]
+position = Vector2(-209.6, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_69" type="Sprite2D" parent="background_2"]
+position = Vector2(-501.6, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_70" type="Sprite2D" parent="background_2"]
+position = Vector2(-791.8, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_71" type="Sprite2D" parent="background_2"]
+position = Vector2(948.2, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+modulate = Color(0.5, 0.5, 0.5, 1)
+z_index = -1
+position = Vector2(7.22701, 53.2878)
+scale = Vector2(0.83, 0.83)
+script = ExtResource("3_cyfwn")
+size = 0.83
+layer = -1
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="background_1"]
+position = Vector2(82.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="background_1"]
+position = Vector2(-209.6, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, 319.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_16" type="Sprite2D" parent="background_1"]
+position = Vector2(82.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_17" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_18" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_19" type="Sprite2D" parent="background_1"]
+position = Vector2(-209.6, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_20" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_21" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_23" type="Sprite2D" parent="background_1"]
+position = Vector2(-1080, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_26" type="Sprite2D" parent="background_1"]
+position = Vector2(-1080, 33)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_30" type="Sprite2D" parent="background_1"]
+position = Vector2(-1080, 317)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_31" type="Sprite2D" parent="background_1"]
+position = Vector2(1238, 189)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_33" type="Sprite2D" parent="background_1"]
+position = Vector2(1238, 47)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_37" type="Sprite2D" parent="background_1"]
+position = Vector2(1238, 318)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_22" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, 187.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_24" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_25" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_27" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_28" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_29" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, 50.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_32" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_34" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_35" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_36" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -79.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_39" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_42" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_43" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -211.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_45" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_46" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_48" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_49" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_50" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -343.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_52" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_53" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_54" type="Sprite2D" parent="background_1"]
+position = Vector2(-209.6, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_55" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_56" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_57" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -477.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_58" type="Sprite2D" parent="background_1"]
+position = Vector2(82.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_59" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_60" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_61" type="Sprite2D" parent="background_1"]
+position = Vector2(-209.6, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_62" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_63" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_64" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -602.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_65" type="Sprite2D" parent="background_1"]
+position = Vector2(82.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_66" type="Sprite2D" parent="background_1"]
+position = Vector2(372.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_67" type="Sprite2D" parent="background_1"]
+position = Vector2(657.4, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_68" type="Sprite2D" parent="background_1"]
+position = Vector2(-209.6, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_69" type="Sprite2D" parent="background_1"]
+position = Vector2(-501.6, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_70" type="Sprite2D" parent="background_1"]
+position = Vector2(-791.8, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_71" type="Sprite2D" parent="background_1"]
+position = Vector2(948.2, -736.8)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="main_layer" type="Node2D" parent="." groups=["2d_sprites"]]
+script = ExtResource("3_cyfwn")
+
+[node name="brick_tile_1_6" type="Sprite2D" parent="main_layer"]
+position = Vector2(-749, -91)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_7" type="Sprite2D" parent="main_layer"]
+position = Vector2(-780, -358)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_8" type="Sprite2D" parent="main_layer"]
+position = Vector2(-782, -633)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_3" type="Sprite2D" parent="main_layer"]
+position = Vector2(835, -89)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_4" type="Sprite2D" parent="main_layer"]
+position = Vector2(817, -354)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_5" type="Sprite2D" parent="main_layer"]
+position = Vector2(813, -621)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="main_layer"]
+position = Vector2(-1, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="main_layer"]
+position = Vector2(289, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="main_layer"]
+position = Vector2(574, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="main_layer"]
+position = Vector2(-293, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="main_layer"]
+position = Vector2(-585, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="main_layer"]
+position = Vector2(-585, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="main_layer"]
+position = Vector2(-873, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_16" type="Sprite2D" parent="main_layer"]
+position = Vector2(865, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+position = Vector2(-1.70047, 2.49109)
+scale = Vector2(1.04, 1.04)
+script = ExtResource("3_cyfwn")
+size = 1.04
+
+[node name="brick_tile_1_9" type="Sprite2D" parent="forground_1"]
+position = Vector2(868, -85)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_10" type="Sprite2D" parent="forground_1"]
+position = Vector2(854, -356)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_13" type="Sprite2D" parent="forground_1"]
+position = Vector2(843, -626)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_11" type="Sprite2D" parent="forground_1"]
+position = Vector2(-806, -357)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_14" type="Sprite2D" parent="forground_1"]
+position = Vector2(-836, -638)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_12" type="Sprite2D" parent="forground_1"]
+position = Vector2(-783, -91)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="forground_1"]
+position = Vector2(82.4, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="forground_1"]
+position = Vector2(372.4, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="forground_1"]
+position = Vector2(657.4, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="forground_1"]
+position = Vector2(-209.6, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="forground_1"]
+position = Vector2(-501.6, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="forground_1"]
+position = Vector2(-791.8, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="forground_1"]
+position = Vector2(948.2, 364.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+position = Vector2(-4.25119, -12.0223)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("3_cyfwn")
+size = 1.1
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="forground_2"]
+position = Vector2(-270.6, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="forground_2"]
+position = Vector2(16.1999, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="forground_2"]
+position = Vector2(298.2, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="forground_2"]
+position = Vector2(578.2, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_16" type="Sprite2D" parent="forground_2"]
+position = Vector2(-558.8, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_17" type="Sprite2D" parent="forground_2"]
+position = Vector2(-847, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_18" type="Sprite2D" parent="forground_2"]
+position = Vector2(865, 404.2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+position = Vector2(-4.25119, -12.0223)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("3_cyfwn")
+size = 1.1
+
+[node name="ColorRect" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 95.0
+offset_top = 365.0
+offset_right = 1116.0
+offset_bottom = 608.0
+
+[node name="ColorRect42" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 792.0
+offset_top = -969.0
+offset_right = 1813.0
+offset_bottom = -726.0
+scale = Vector2(0.549142, 2.39045)
+
+[node name="ColorRect5" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 731.0
+offset_top = 337.0
+offset_right = 1335.0
+offset_bottom = 580.0
+
+[node name="ColorRect6" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 936.0
+offset_top = 210.0
+offset_right = 1540.0
+offset_bottom = 453.0
+
+[node name="ColorRect34" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 1143.0
+offset_top = 46.0
+offset_right = 1747.0
+offset_bottom = 289.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect35" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 1071.0
+offset_top = -176.0
+offset_right = 1675.0
+offset_bottom = 67.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect36" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1528.0
+offset_top = -239.0
+offset_right = -924.0
+offset_bottom = 4.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect37" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1611.0
+offset_top = -48.0
+offset_right = -1007.0
+offset_bottom = 195.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect38" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1594.0
+offset_top = 169.0
+offset_right = -990.0
+offset_bottom = 412.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect39" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1517.0
+offset_top = -54.0
+offset_right = -913.0
+offset_bottom = 189.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect40" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 868.0
+offset_top = -51.0
+offset_right = 1472.0
+offset_bottom = 192.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect41" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1446.0
+offset_top = -46.0
+offset_right = -842.0
+offset_bottom = 197.0
+scale = Vector2(1, 1.8)
+
+[node name="ColorRect7" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1208.0
+offset_top = 274.0
+offset_right = -811.0
+offset_bottom = 517.0
+
+[node name="ColorRect8" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1213.0
+offset_top = 178.0
+offset_right = -816.0
+offset_bottom = 421.0
+
+[node name="ColorRect9" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1140.0
+offset_top = -154.0
+offset_right = -743.0
+offset_bottom = 89.0
+
+[node name="ColorRect10" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1168.0
+offset_top = -354.0
+offset_right = -771.0
+offset_bottom = 11.0
+
+[node name="ColorRect26" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1153.0
+offset_top = -802.0
+offset_right = -756.0
+offset_bottom = -437.0
+
+[node name="ColorRect27" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1138.0
+offset_top = -912.0
+offset_right = -741.0
+offset_bottom = -547.0
+
+[node name="ColorRect28" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1020.0
+offset_top = -980.0
+offset_right = -623.0
+offset_bottom = -615.0
+
+[node name="ColorRect29" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 636.0
+offset_top = -953.0
+offset_right = 1033.0
+offset_bottom = -588.0
+
+[node name="ColorRect30" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 777.0
+offset_top = -824.0
+offset_right = 1174.0
+offset_bottom = -459.0
+
+[node name="ColorRect31" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 407.0
+offset_top = -1073.0
+offset_right = 939.0
+offset_bottom = -580.0
+
+[node name="ColorRect32" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1018.0
+offset_top = -1017.0
+offset_right = -417.0
+offset_bottom = -452.0
+
+[node name="ColorRect33" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 429.0
+offset_top = -1079.0
+offset_right = 1030.0
+offset_bottom = -514.0
+
+[node name="ColorRect11" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1112.0
+offset_top = -515.0
+offset_right = -715.0
+offset_bottom = -150.0
+
+[node name="ColorRect12" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1021.0
+offset_top = -670.0
+offset_right = -624.0
+offset_bottom = -305.0
+
+[node name="ColorRect17" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1131.0
+offset_top = -349.0
+offset_right = -734.0
+offset_bottom = 16.0
+
+[node name="ColorRect18" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1181.0
+offset_top = -185.0
+offset_right = -784.0
+offset_bottom = 180.0
+
+[node name="ColorRect20" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 912.0
+offset_top = 207.0
+offset_right = 1309.0
+offset_bottom = 572.0
+
+[node name="ColorRect21" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 807.0
+offset_top = -175.0
+offset_right = 1204.0
+offset_bottom = 190.0
+
+[node name="ColorRect22" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 836.0
+offset_top = -309.0
+offset_right = 1233.0
+offset_bottom = 56.0
+
+[node name="ColorRect23" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 781.0
+offset_top = -638.0
+offset_right = 1178.0
+offset_bottom = -273.0
+
+[node name="ColorRect43" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 687.331
+offset_top = 192.323
+offset_right = 1084.33
+offset_bottom = 557.323
+scale = Vector2(1.14222, 1.19503)
+
+[node name="ColorRect44" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1119.03
+offset_top = 275.051
+offset_right = -722.032
+offset_bottom = 640.051
+scale = Vector2(1.14222, 1.19503)
+
+[node name="ColorRect45" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 776.355
+offset_top = 102.207
+offset_right = 1173.35
+offset_bottom = 467.207
+scale = Vector2(1.14222, 1.19503)
+
+[node name="ColorRect24" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 439.0
+offset_top = 315.0
+offset_right = 836.0
+offset_bottom = 680.0
+
+[node name="ColorRect25" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1150.0
+offset_top = -548.0
+offset_right = -753.0
+offset_bottom = -183.0
+
+[node name="ColorRect19" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 74.0
+offset_top = 318.0
+offset_right = 471.0
+offset_bottom = 683.0
+
+[node name="ColorRect13" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 591.0
+offset_top = -747.0
+offset_right = 988.0
+offset_bottom = -382.0
+
+[node name="ColorRect14" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 817.0
+offset_top = -591.0
+offset_right = 1214.0
+offset_bottom = -226.0
+
+[node name="ColorRect15" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 784.0
+offset_top = -421.0
+offset_right = 1181.0
+offset_bottom = -56.0
+
+[node name="ColorRect16" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = 885.0
+offset_top = -251.0
+offset_right = 1282.0
+offset_bottom = 114.0
+
+[node name="ColorRect2" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -478.0
+offset_top = 348.0
+offset_right = 543.0
+offset_bottom = 591.0
+
+[node name="ColorRect3" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -855.0
+offset_top = 395.0
+offset_right = 166.0
+offset_bottom = 638.0
+
+[node name="ColorRect4" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -1152.0
+offset_top = 299.0
+offset_right = -131.0
+offset_bottom = 546.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+clip_children = 1
+color = Color(0.80704, 0.7663, 0.97, 1)

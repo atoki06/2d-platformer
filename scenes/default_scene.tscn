@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcehihmytbdiv"]
+
+[ext_resource type="Script" uid="uid://8gtxpiete45" path="res://scripts/room.gd" id="1_fh1ba"]
+[ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_bqlq0"]
+[ext_resource type="Script" uid="uid://b24ivokgh0wnq" path="res://scripts/parallax.gd" id="3_kedl7"]
+[ext_resource type="Shader" uid="uid://dsgk4bqh6mfic" path="res://shader/black_gradient.gdshader" id="4_ksgdq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
+size = Vector2(222.5, 190)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1hoc"]
+shader = ExtResource("4_ksgdq")
+
+[node name="scene" type="Node2D" groups=["room"]]
+script = ExtResource("1_fh1ba")
+metadata/_custom_type_script = "uid://8gtxpiete45"
+
+[node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
+visible = false
+
+[node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
+visible = false
+modulate = Color(0.37, 0.643, 1, 1)
+
+[node name="damage" type="StaticBody2D" parent="." groups=["collision", "env_damage"]]
+visible = false
+modulate = Color(0.37, 0.643, 1, 1)
+
+[node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
+visible = false
+position = Vector2(-914, 287)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_bqlq0")
+room_path = "res://scenes/room_01.tscn"
+room_entry_index = 1
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_01"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -122)
+shape = SubResource("RectangleShape2D_dryon")
+debug_color = Color(0.7, 0.326667, 0, 0)
+
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+modulate = Color(0.25, 0.25, 0.25, 1)
+script = ExtResource("3_kedl7")
+size = 0.6
+layer = -3
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+modulate = Color(0.5, 0.5, 0.5, 1)
+script = ExtResource("3_kedl7")
+size = 0.8
+layer = -1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+script = ExtResource("3_kedl7")
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+script = ExtResource("3_kedl7")
+size = 1.04
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+script = ExtResource("3_kedl7")
+size = 1.01
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+script = ExtResource("3_kedl7")
+size = 1.1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="ColorRect4" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -235.0
+offset_top = -228.0
+offset_right = 221.0
+offset_bottom = 223.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+clip_children = 1
+color = Color(0.80704, 0.7663, 0.97, 1)

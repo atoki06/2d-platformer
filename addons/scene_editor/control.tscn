@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqbgekfnbia7i"]
+
+[ext_resource type="Script" uid="uid://busnqjkpll6cp" path="res://addons/scene_editor/control.gd" id="1_h4xhd"]
+[ext_resource type="Script" uid="uid://2kstiygjfv7a" path="res://addons/scene_editor/button.gd" id="1_i16bq"]
+[ext_resource type="Script" uid="uid://1rwvqeh55ni1" path="res://addons/scene_editor/button_2.gd" id="2_n6h8h"]
+[ext_resource type="Script" uid="uid://w8qxnjb6ky7d" path="res://addons/scene_editor/button_3.gd" id="4_r2lrx"]
+[ext_resource type="Script" uid="uid://wxsi8rny4ljm" path="res://addons/scene_editor/button_5.gd" id="4_uwehw"]
+[ext_resource type="Script" uid="uid://crhjnn2hvrcis" path="res://addons/scene_editor/button_4.gd" id="5_t2mtk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7uwni"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i16bq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6h8h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4xhd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r2lrx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4xhd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 93.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Scene Editor"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+text = "Parallax"
+script = ExtResource("1_i16bq")
+
+[node name="Container" type="Container" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 9.82)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+text = "Collision"
+script = ExtResource("2_n6h8h")
+
+[node name="Button5" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+text = "Lock"
+script = ExtResource("4_uwehw")
+
+[node name="Container2" type="Container" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 9.82)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+text = "Margin"
+script = ExtResource("4_r2lrx")
+
+[node name="Container3" type="Container" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 9.82)
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+text = "Player"
+script = ExtResource("5_t2mtk")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="VBoxContainer/HBoxContainer/Button2" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button5" to="VBoxContainer/HBoxContainer/Button5" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="VBoxContainer/Button3" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button4" to="VBoxContainer/Button4" method="_on_pressed"]

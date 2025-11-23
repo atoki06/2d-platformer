@@ -1,0 +1,231 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddxxjd6ximr3a"]
+
+[ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_v0oeq"]
+[ext_resource type="Script" uid="uid://b24ivokgh0wnq" path="res://scenes/parallax.gd" id="3_cyfwn"]
+[ext_resource type="Texture2D" uid="uid://cr3wrwtckq8ol" path="res://2d_assets/environment/ruins/brick_wall_tile_1.png" id="3_dryon"]
+[ext_resource type="Texture2D" uid="uid://by8od7g0027si" path="res://2d_assets/environment/ruins/brick_ground_tile_1.png" id="5_cyfwn"]
+
+[sub_resource type="Environment" id="Environment_v0oeq"]
+background_mode = 1
+background_color = Color(0.189738, 0.150682, 0.356186, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lb5by"]
+size = Vector2(1442.5, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyfwn"]
+size = Vector2(172.625, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g1tf"]
+size = Vector2(172.625, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
+
+[node name="room_01" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v0oeq")
+
+[node name="collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon2D" parent="collisions"]
+top_level = true
+polygon = PackedVector2Array(659, 232, 684, -75, 688, -229, 666, -238, 665, -496, 896, -491, 928, 342, 755, 469, 618, 424)
+
+[node name="CollisionPolygon3D2" type="CollisionPolygon2D" parent="collisions"]
+top_level = true
+position = Vector2(-1165, -27)
+polygon = PackedVector2Array(525, -471, 541, -211, 572, -59, 541, 124, 553, 321, 291, 295, 276, -465)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions"]
+top_level = true
+position = Vector2(-6.25, 366)
+shape = SubResource("RectangleShape2D_lb5by")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions"]
+top_level = true
+position = Vector2(604.688, 269)
+shape = SubResource("RectangleShape2D_cyfwn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions"]
+top_level = true
+position = Vector2(-539, 273)
+shape = SubResource("RectangleShape2D_3g1tf")
+
+[node name="main_layer" type="Node2D" parent="."]
+
+[node name="brick_tile_3_14" type="Sprite2D" parent="main_layer"]
+position = Vector2(-639, 295)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_15" type="Sprite2D" parent="main_layer"]
+position = Vector2(630, 291)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_1_2" type="Sprite2D" parent="main_layer"]
+position = Vector2(810, 178)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_5" type="Sprite2D" parent="main_layer"]
+position = Vector2(-769, 172)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_6" type="Sprite2D" parent="main_layer"]
+position = Vector2(-749, -91)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_7" type="Sprite2D" parent="main_layer"]
+position = Vector2(-780, -358)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_3" type="Sprite2D" parent="main_layer"]
+position = Vector2(835, -89)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_4" type="Sprite2D" parent="main_layer"]
+position = Vector2(817, -354)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="main_layer"]
+position = Vector2(-1, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="main_layer"]
+position = Vector2(289, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="main_layer"]
+position = Vector2(574, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="main_layer"]
+position = Vector2(-293, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="main_layer"]
+position = Vector2(-585, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="forground_1" type="Node2D" parent="."]
+script = ExtResource("3_cyfwn")
+size = 1.04
+
+[node name="brick_tile_1_8" type="Sprite2D" parent="forground_1"]
+position = Vector2(831, 178)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_9" type="Sprite2D" parent="forground_1"]
+position = Vector2(868, -85)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_10" type="Sprite2D" parent="forground_1"]
+position = Vector2(854, -356)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+
+[node name="brick_tile_1_11" type="Sprite2D" parent="forground_1"]
+position = Vector2(-804, -360)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_12" type="Sprite2D" parent="forground_1"]
+position = Vector2(-781, -99)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_1_13" type="Sprite2D" parent="forground_1"]
+position = Vector2(-816, 174)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dryon")
+flip_h = true
+
+[node name="brick_tile_3_9" type="Sprite2D" parent="forground_1"]
+position = Vector2(86.2, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_10" type="Sprite2D" parent="forground_1"]
+position = Vector2(376.2, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_11" type="Sprite2D" parent="forground_1"]
+position = Vector2(661.2, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_12" type="Sprite2D" parent="forground_1"]
+position = Vector2(-205.8, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="brick_tile_3_13" type="Sprite2D" parent="forground_1"]
+position = Vector2(-497.8, 363)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_cyfwn")
+flip_h = true
+
+[node name="exit_01" type="Area2D" parent="."]
+position = Vector2(-4.5, -1)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_v0oeq")
+disabled = true
+room_path = "res://scenes/world.tscn"
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_01"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_dryon")
+
+[node name="exit_02" type="Area2D" parent="."]
+position = Vector2(4.5, -1)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_v0oeq")
+disabled = true
+index = 1
+direction = 1
+room_path = "res://scenes/world.tscn"
+room_entry_index = 1
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_02"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_dryon")
+
+[node name="camera" type="Camera2D" parent="."]
+top_level = true
+position = Vector2(0, 3)
