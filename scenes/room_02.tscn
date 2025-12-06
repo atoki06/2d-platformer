@@ -46,6 +46,8 @@ shader = ExtResource("4_qmn6l")
 
 [node name="scene" type="Node2D" groups=["room"]]
 script = ExtResource("1_d5h8r")
+margin_min = Vector2(0.265, -2.895)
+margin_max = Vector2(14.365, -0.885)
 metadata/_custom_type_script = "uid://8gtxpiete45"
 metadata/_edit_lock_ = true
 

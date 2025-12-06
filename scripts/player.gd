@@ -44,6 +44,7 @@ var is_camera_limited = false
 var camera_speed = 8
 var camera_speed_target = 8
 var new_room = false
+var collision_debug = false
 
 var room
 var drawer
@@ -56,7 +57,8 @@ var input = {
 	"right" : KEY_D,
 	"jump" : KEY_SPACE,
 	"debug" : KEY_B,
-	"attack" : MOUSE_BUTTON_LEFT
+	"attack" : MOUSE_BUTTON_LEFT,
+	"collision_debug" : KEY_N
 }
 var velo = Vector2(0,0)
 
@@ -93,6 +95,8 @@ func _ready() -> void:
 		
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("collision_debug"):
+		collision_debug = !collision_debug
 	drawer.queue_redraw()
 	var mouse_pos
 	if Input.is_action_just_pressed("debug"):
@@ -271,6 +275,8 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 		dubble_jump_used = false
 		
 func draw() -> void:
+	if !collision_debug:
+		return
 	for node in room.get_children():
 		if node.is_in_group("collision"):
 			var color

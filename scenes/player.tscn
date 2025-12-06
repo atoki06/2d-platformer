@@ -33,7 +33,6 @@ shader = ExtResource("7_fjrip")
 shader_parameter/size = 0.37
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(-13.3333, -3.33334)
 script = ExtResource("1_qhqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

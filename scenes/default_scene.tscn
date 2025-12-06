@@ -16,18 +16,14 @@ script = ExtResource("1_fh1ba")
 metadata/_custom_type_script = "uid://8gtxpiete45"
 
 [node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
-visible = false
 
 [node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
 
 [node name="damage" type="StaticBody2D" parent="." groups=["collision", "env_damage"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
 
 [node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
-visible = false
 position = Vector2(-914, 287)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
