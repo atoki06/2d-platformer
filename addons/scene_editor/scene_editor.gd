@@ -174,12 +174,9 @@ func draw():
 				for collision in i.get_children():
 					collision.modulate.a = 0.0
 					if collision is CollisionShape2D and collision.shape:
-						
 						var pos = collision.global_position
 						var radius = collision.shape.size / 2.0
-						#overlay.draw_circle(-camera[2] / Vector2(camera[0].x,camera[1].y) + viewport_size / 2 / camera[1].y, 30, Color(1.0, 1.0, 1.0))
-						#overlay.draw_line(-camera[2] / Vector2(camera[0].x,camera[1].y) + viewport_size / 2 / camera[1].y, pos - radius, Color.RED, 10, true)
-						#draw box
+						
 						overlay.draw_line(pos - radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
 						overlay.draw_line(pos + radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
 						overlay.draw_line(pos + radius * Vector2(-1,1), pos + radius, color, line_thickness, true)

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+#const
+const line_thickness = 2
+
 #node connections
 @onready var soundtrack_player = $soundtrack_player
 @onready var black_screen : Node = $camera/black_screen
@@ -42,6 +45,9 @@ var camera_speed = 8
 var camera_speed_target = 8
 var new_room = false
 
+var room
+var drawer
+
 #input
 var input = {
 	"up" : KEY_W,
@@ -58,6 +64,11 @@ var velo = Vector2(0,0)
 var debug_open = false
 
 func _ready() -> void:
+	drawer = Node2D.new()
+	drawer.top_level = true
+	drawer.z_index = 20
+	drawer.draw.connect(draw)
+	add_child(drawer)
 	var sound = load("res://sounds/Shoot_combined.wav")
 	sound_player.stream = sound
 	soundtrack_player.playing = false
@@ -82,6 +93,7 @@ func _ready() -> void:
 		
 
 func _process(_delta: float) -> void:
+	drawer.queue_redraw()
 	var mouse_pos
 	if Input.is_action_just_pressed("debug"):
 		toggle_debug_mode()
@@ -168,7 +180,7 @@ func _physics_process(delta: float) -> void:
 	#global_position.z = 0
 	
 	#move camera
-	var room = get_parent().get_child(1)
+	room = get_parent().get_child(1)
 	var cam_pos_x = clamp(global_position.x,room.margin_min.x * 100,room.margin_max.x * 100)
 	var cam_pos_y = clamp(global_position.y,room.margin_min.y * 100,room.margin_max.y * 100)
 	var camera_direction = (Vector2(cam_pos_x,cam_pos_y) + camera_position - camera.global_position)
@@ -258,3 +270,36 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 		is_pogoing = true
 		dubble_jump_used = false
 		
+func draw() -> void:
+	for node in room.get_children():
+		if node.is_in_group("collision"):
+			var color
+			if node.is_in_group("slide_wall"):
+				color = Color(0.21568628, 1.0, 0.0)
+			elif node.is_in_group("exit"):
+				color = Color(1.0, 0.6509804, 0.0)
+			elif node.is_in_group("env_damage"):
+				color = Color(1.0, 0.0, 0.0)
+			else:
+				color = Color(0.0, 0.4, 1.0)
+			
+			color.a = 0.7
+			
+			
+			for collision in node.get_children():
+				if collision is CollisionShape2D and collision.shape:
+					var pos = collision.global_position
+					var radius = collision.shape.size / 2.0
+					
+					drawer.draw_line(pos - radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
+					drawer.draw_line(pos + radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
+					drawer.draw_line(pos + radius * Vector2(-1,1), pos + radius, color, line_thickness, true)
+					drawer.draw_line(pos + radius * Vector2(-1,1), pos - radius, color, line_thickness, true)
+				
+				if collision is CollisionPolygon2D and collision.polygon.size() > 2:
+					var pos = collision.global_position
+					var polygon = collision.polygon
+					for point in polygon.size():
+						polygon[point] += pos
+					drawer.draw_polyline(polygon, color, line_thickness, true)
+					drawer.draw_line(polygon[0], polygon[polygon.size() - 1], color, line_thickness, true)

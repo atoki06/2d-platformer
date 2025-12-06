@@ -37,6 +37,7 @@ position = Vector2(-13.3333, -3.33334)
 script = ExtResource("1_qhqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-4.76837e-07, -100)
 scale = Vector2(0.375, 0.4)
 texture = ExtResource("2_smehm")
@@ -44,7 +45,6 @@ hframes = 3
 vframes = 3
 
 [node name="Sprite3D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(0, -100)
 texture = SubResource("GradientTexture2D_4flbx")
 
