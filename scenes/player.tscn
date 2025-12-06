@@ -19,6 +19,7 @@ width = 100
 height = 200
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+resource_local_to_scene = true
 size = Vector2(100, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
@@ -31,7 +32,8 @@ size = Vector2(615.385, 615.385)
 shader = ExtResource("7_fjrip")
 shader_parameter/size = 0.37
 
-[node name="Player16" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(-13.3333, -3.33334)
 script = ExtResource("1_qhqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -40,7 +42,6 @@ scale = Vector2(0.375, 0.4)
 texture = ExtResource("2_smehm")
 hframes = 3
 vframes = 3
-frame = 8
 
 [node name="Sprite3D" type="Sprite2D" parent="."]
 visible = false
@@ -94,7 +95,6 @@ scale = Vector2(1.3, 1.3)
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="black_fog" type="ColorRect" parent="."]
-visible = false
 z_index = 10
 material = SubResource("ShaderMaterial_smehm")
 offset_left = -2246.0
@@ -104,6 +104,7 @@ offset_bottom = 1403.0
 color = Color(0, 0, 0, 1)
 
 [node name="camera" type="Camera2D" parent="."]
+visible = false
 top_level = true
 z_index = 10
 position = Vector2(0, -98)
@@ -124,6 +125,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="soundplayer" type="AudioStreamPlayer" parent="."]
-volume_db = -5.0
+volume_db = -10.0
 
 [connection signal="area_entered" from="attack" to="." method="_on_area_3d_area_entered"]

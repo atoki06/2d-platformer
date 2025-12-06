@@ -61,9 +61,8 @@ func _ready() -> void:
 	var sound = load("res://sounds/Shoot_combined.wav")
 	sound_player.stream = sound
 	soundtrack_player.playing = false
-	if !Engine.is_editor_hint():
-		camera.visible = true
-		black_screen.visible = true
+	camera.visible = !Engine.is_editor_hint()
+	black_screen.visible = !Engine.is_editor_hint()
 	visible = true
 	for action in InputMap.get_actions():
 		InputMap.erase_action(action)
@@ -239,7 +238,7 @@ func get_all_children(in_node,arr:=[]):
 	return arr
 	
 func attack():
-	sound_player.play(0.0)
+	#sound_player.play(0.0)
 	attack_body.rotation_degrees = 90 + 90 * looking_direction * (int(!is_on_wall()) - 0.5) * 2.0
 	if Input.is_action_pressed("down") and !is_on_floor():
 		attack_body.rotation_degrees = -90

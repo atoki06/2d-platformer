@@ -20,7 +20,6 @@ size = Vector2(222.5, 190)
 shader = ExtResource("6_3g1tf")
 
 [node name="room_01" type="Node2D" groups=["room"]]
-position = Vector2(0, -12.1666)
 script = ExtResource("1_cyfwn")
 margin_min = Vector2(-1.68, -5.22)
 margin_max = Vector2(1.96, -0.17)
@@ -57,7 +56,7 @@ gravity_direction = Vector2(0, -1)
 gravity = 9.8
 angular_damp = 0.1
 script = ExtResource("2_v0oeq")
-room_path = "res://scenes/room_01.tscn"
+room_path = "res://scenes/room_02.tscn"
 room_entry_index = 1
 
 [node name="hitbox" type="CollisionShape2D" parent="exit_01"]
@@ -82,11 +81,9 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -122)
 shape = SubResource("RectangleShape2D_3g1tf")
 
-[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.25, 0.25, 0.25, 1)
 z_index = -1
-position = Vector2(17.0047, 108.922)
-scale = Vector2(0.6, 0.6)
 script = ExtResource("3_cyfwn")
 size = 0.6
 layer = -3
@@ -451,11 +448,9 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_cyfwn")
 flip_h = true
 
-[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
 z_index = -1
-position = Vector2(7.22701, 53.2878)
-scale = Vector2(0.83, 0.83)
 script = ExtResource("3_cyfwn")
 size = 0.83
 layer = -1
@@ -802,7 +797,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_cyfwn")
 flip_h = true
 
-[node name="main_layer" type="Node2D" parent="." groups=["2d_sprites"]]
+[node name="main_layer" type="Node2D" parent="." groups=["2d_sprites", "sprite_layer"]]
 script = ExtResource("3_cyfwn")
 
 [node name="brick_tile_1_6" type="Sprite2D" parent="main_layer"]
@@ -886,9 +881,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_cyfwn")
 flip_h = true
 
-[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
-position = Vector2(-1.70047, 2.49109)
-scale = Vector2(1.04, 1.04)
+[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_cyfwn")
 size = 1.04
 
@@ -967,9 +960,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_cyfwn")
 flip_h = true
 
-[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
-position = Vector2(-4.25119, -12.0223)
-scale = Vector2(1.1, 1.1)
+[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_cyfwn")
 size = 1.1
 
@@ -1015,9 +1006,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_cyfwn")
 flip_h = true
 
-[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
-position = Vector2(-4.25119, -12.0223)
-scale = Vector2(1.1, 1.1)
+[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_cyfwn")
 size = 1.1
 

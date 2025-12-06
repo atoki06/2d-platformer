@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqbgekfnbia7i"]
+[gd_scene load_steps=17 format=3 uid="uid://bqbgekfnbia7i"]
 
 [ext_resource type="Script" uid="uid://busnqjkpll6cp" path="res://addons/scene_editor/control.gd" id="1_h4xhd"]
 [ext_resource type="Script" uid="uid://2kstiygjfv7a" path="res://addons/scene_editor/button.gd" id="1_i16bq"]
+[ext_resource type="StyleBox" uid="uid://brx44p6vydl4d" path="res://addons/scene_editor/control.tres" id="2_cdmdk"]
 [ext_resource type="Script" uid="uid://1rwvqeh55ni1" path="res://addons/scene_editor/button_2.gd" id="2_n6h8h"]
 [ext_resource type="Script" uid="uid://w8qxnjb6ky7d" path="res://addons/scene_editor/button_3.gd" id="4_r2lrx"]
 [ext_resource type="Script" uid="uid://wxsi8rny4ljm" path="res://addons/scene_editor/button_5.gd" id="4_uwehw"]
@@ -13,9 +14,17 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6h8h"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdmdk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yiut4"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4xhd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r2lrx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7anuk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mnypo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -38,15 +47,14 @@ text = "Scene Editor"
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
+theme_override_styles/hover = ExtResource("2_cdmdk")
+theme_override_styles/pressed = ExtResource("2_cdmdk")
+theme_override_styles/normal = ExtResource("2_cdmdk")
 text = "Parallax"
 script = ExtResource("1_i16bq")
 
-[node name="Container" type="Container" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 9.82)
+[node name="Container" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 4.73)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -57,6 +65,8 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_cdmdk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yiut4")
 theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
 text = "Collision"
@@ -67,13 +77,15 @@ layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7uwni")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i16bq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_n6h8h")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_7anuk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mnypo")
 theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
 text = "Lock"
 script = ExtResource("4_uwehw")
 
-[node name="Container2" type="Container" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 9.82)
+[node name="Container2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 4.73)
 layout_mode = 2
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
@@ -86,8 +98,8 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
 text = "Margin"
 script = ExtResource("4_r2lrx")
 
-[node name="Container3" type="Container" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 9.82)
+[node name="Container3" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 4.73)
 layout_mode = 2
 
 [node name="Button4" type="Button" parent="VBoxContainer"]
@@ -99,6 +111,23 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_h4xhd")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2lrx")
 text = "Player"
 script = ExtResource("5_t2mtk")
+
+[node name="Container4" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 4.73)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Text"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="VBoxContainer/HBoxContainer/Button2" method="_on_pressed"]

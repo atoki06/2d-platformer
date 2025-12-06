@@ -43,38 +43,44 @@ position = Vector2(0, -122)
 shape = SubResource("RectangleShape2D_dryon")
 debug_color = Color(0.7, 0.326667, 0, 0)
 
-[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.25, 0.25, 0.25, 1)
 script = ExtResource("3_kedl7")
 size = 0.6
 layer = -3
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
-[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
 script = ExtResource("3_kedl7")
 size = 0.8
 layer = -1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
-[node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_kedl7")
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
-[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_kedl7")
 size = 1.04
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
-[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_kedl7")
 size = 1.01
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
-[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax"]]
+[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 script = ExtResource("3_kedl7")
 size = 1.1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="black_shade"]
 material = SubResource("ShaderMaterial_a1hoc")
@@ -82,6 +88,7 @@ offset_left = -235.0
 offset_top = -228.0
 offset_right = 221.0
 offset_bottom = 223.0
+metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 clip_children = 1

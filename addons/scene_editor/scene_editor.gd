@@ -6,17 +6,27 @@ var overlay : Node2D
 var viewport
 var player
 
+
 func _enter_tree() -> void:
+	var scene = get_tree().get_edited_scene_root()
+	scene_changed.connect(new_scene)
+	#for action in InputMap.get_actions():
+	#	InputMap.erase_action(action)
 	toolbar = preload("res://addons/scene_editor/control.tscn").instantiate()
 	toolbar.name = "Scene Editor"
-	add_control_to_dock(DOCK_SLOT_RIGHT_BL,toolbar)
+	add_control_to_dock(DOCK_SLOT_LEFT_BL,toolbar)
 	viewport = get_editor_interface().get_editor_viewport_2d()
 	overlay = Node2D.new()
+	print(overlay)
 	overlay.draw.connect(draw)
 	overlay.z_index = 100
 	viewport.add_child(overlay)
 	player = preload("res://scenes/player.tscn").instantiate()
+	player.name = "player_ghost"
 	viewport.add_child(player)
+	
+	new_scene(scene)
+
 	
 func _process(delta: float) -> void:
 	overlay.queue_redraw()
@@ -99,7 +109,8 @@ func draw():
 	var scene = get_tree().get_edited_scene_root()
 	var camera = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
 	var viewport_size = get_editor_interface().get_editor_viewport_2d().size
-	
+	var line_thickness = 1.0 / ((camera[0].x + camera[0].y))
+		
 	var button2 = toolbar.get_child(0).get_child(3).get_child(0)
 	var button3 = toolbar.get_child(0).get_child(5)
 	var button4 = toolbar.get_child(0).get_child(7)
@@ -108,26 +119,26 @@ func draw():
 	
 	#var tree = Tree.new()
 	#var tree_item = tree.create_item()
-	if player and scene.is_in_group("room"):
+	if player and scene and scene.is_in_group("room"):
 		if button4.player:
 			var pos = player.global_position + Vector2(0.0,1.0)
 			var size = Vector2(DisplayServer.screen_get_size() / 2.0  / 0.6)
 			
-			overlay.draw_line(pos - size, pos + size * Vector2(1,-1), Color(1.0, 0.0, 0.0), 2, true)
-			overlay.draw_line(pos + size, pos - size * Vector2(1,-1), Color(1.0, 0.0, 0.0), 2, true)
-			overlay.draw_line(pos - size, pos + size * Vector2(-1,1), Color(1.0, 0.0, 0.0), 2, true)
-			overlay.draw_line(pos + size, pos - size * Vector2(-1,1), Color(1.0, 0.0, 0.0), 2, true)	
+			overlay.draw_line(pos - size, pos + size * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
+			overlay.draw_line(pos + size, pos - size * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
+			overlay.draw_line(pos - size, pos + size * Vector2(-1,1), Color(1.0, 0.0, 0.0), line_thickness, true)
+			overlay.draw_line(pos + size, pos - size * Vector2(-1,1), Color(1.0, 0.0, 0.0), line_thickness, true)	
 
 	if scene and scene.is_in_group("room") and button3.margin:
 		var margin_min = scene.margin_min * 100
 		var margin_max = scene.margin_max * 100
 		var cam_radius = Vector2(DisplayServer.screen_get_size() / 2  / 0.6)
-		overlay.draw_line(margin_min - cam_radius, Vector2(margin_max.x,margin_min.y) + cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), 2, true)
-		overlay.draw_line(margin_max + cam_radius, Vector2(margin_min.x,margin_max.y) - cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), 2, true)
-		overlay.draw_line(margin_min - cam_radius, Vector2(margin_min.x,margin_max.y) + cam_radius * Vector2(-1,1), Color(1.0, 0.0, 0.0), 2, true)
-		overlay.draw_line(margin_max + cam_radius, Vector2(margin_max.x,margin_min.y) - cam_radius * Vector2(-1,1), Color(1.0, 0.0, 0.0), 2, true)
+		overlay.draw_line(margin_min - cam_radius, Vector2(margin_max.x,margin_min.y) + cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
+		overlay.draw_line(margin_max + cam_radius, Vector2(margin_min.x,margin_max.y) - cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
+		overlay.draw_line(margin_min - cam_radius, Vector2(margin_min.x,margin_max.y) + cam_radius * Vector2(-1,1), Color(1.0, 0.0, 0.0), line_thickness, true)
+		overlay.draw_line(margin_max + cam_radius, Vector2(margin_max.x,margin_min.y) - cam_radius * Vector2(-1,1), Color(1.0, 0.0, 0.0), line_thickness, true)
 	
-	if button2.collision:
+	if button2.collision and scene.is_in_group("room"):
 		for i in scene.get_children():
 			if i.is_in_group("collision"):
 				
@@ -155,15 +166,41 @@ func draw():
 						#overlay.draw_circle(-camera[2] / Vector2(camera[0].x,camera[1].y) + viewport_size / 2 / camera[1].y, 30, Color(1.0, 1.0, 1.0))
 						#overlay.draw_line(-camera[2] / Vector2(camera[0].x,camera[1].y) + viewport_size / 2 / camera[1].y, pos - radius, Color.RED, 10, true)
 						#draw box
-						overlay.draw_line(pos - radius, pos + radius * Vector2(1,-1), color, 2, true)
-						overlay.draw_line(pos + radius, pos + radius * Vector2(1,-1), color, 2, true)
-						overlay.draw_line(pos + radius * Vector2(-1,1), pos + radius, color, 2, true)
-						overlay.draw_line(pos + radius * Vector2(-1,1), pos - radius, color, 2, true)
+						overlay.draw_line(pos - radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
+						overlay.draw_line(pos + radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
+						overlay.draw_line(pos + radius * Vector2(-1,1), pos + radius, color, line_thickness, true)
+						overlay.draw_line(pos + radius * Vector2(-1,1), pos - radius, color, line_thickness, true)
 						
 					if collision is CollisionPolygon2D and collision.polygon.size() > 2:
 						var pos = collision.global_position
 						var polygon = collision.polygon
 						for point in polygon.size():
 							polygon[point] += pos
-						overlay.draw_polyline(polygon, color, 2, true)
-						overlay.draw_line(polygon[0], polygon[polygon.size() - 1], color, 2, true)
+						overlay.draw_polyline(polygon, color, line_thickness, true)
+						overlay.draw_line(polygon[0], polygon[polygon.size() - 1], color, line_thickness, true)
+						
+					
+func new_scene(scene):
+	var layermenu = toolbar.get_child(0).get_child(9).get_child(0)
+	for child in layermenu.get_children():
+		child.queue_free()
+		
+	for layer in scene.get_children():
+		if layer.is_in_group("sprite_layer"):
+			var button = Button.new()
+			button.text = layer.name
+			var style = load("res://addons/scene_editor/control.tres")
+			button.set("theme_override_styles/focus",StyleBoxEmpty.new())
+			button.set("theme_override_styles/hover",style)
+			button.set("theme_override_styles/pressed",style)
+			button.set("theme_override_styles/normal",style)
+			layermenu.add_child(button)
+			button.pressed.connect(set_layer.bind(button))
+		
+func set_layer(button):
+	var layermenu = toolbar.get_child(0).get_child(9).get_child(0)
+	for child in layermenu.get_children():
+		if child == button:
+			child.modulate = Color(0.0, 0.6, 1.0)
+		else:
+			child.modulate = Color(1.0, 1.0, 1.0)

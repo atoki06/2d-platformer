@@ -1,0 +1,182 @@
+[gd_scene load_steps=18 format=3 uid="uid://cb42qh1g3sbpu"]
+
+[ext_resource type="Script" uid="uid://8gtxpiete45" path="res://scripts/room.gd" id="1_d5h8r"]
+[ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_qsnje"]
+[ext_resource type="Script" uid="uid://b24ivokgh0wnq" path="res://scripts/parallax.gd" id="3_rrl2k"]
+[ext_resource type="Shader" uid="uid://dsgk4bqh6mfic" path="res://shader/black_gradient.gdshader" id="4_qmn6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5h8r"]
+size = Vector2(310.25, 179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqkxe"]
+size = Vector2(160.563, 399.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsnje"]
+size = Vector2(1460.06, 179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrl2k"]
+size = Vector2(282.03, 179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmn6l"]
+size = Vector2(223, 243.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2tnl"]
+size = Vector2(1116.5, 96.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjcek"]
+size = Vector2(1116.5, 96.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rygq"]
+size = Vector2(270.25, 525.688)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m35lo"]
+size = Vector2(742.125, 261.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwddn"]
+size = Vector2(314.063, 710)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0dgm"]
+size = Vector2(1136, 133.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
+size = Vector2(222.5, 190)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1hoc"]
+shader = ExtResource("4_qmn6l")
+
+[node name="scene" type="Node2D" groups=["room"]]
+script = ExtResource("1_d5h8r")
+metadata/_custom_type_script = "uid://8gtxpiete45"
+
+[node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-903, 412)
+shape = SubResource("RectangleShape2D_d5h8r")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-1128, 176)
+shape = SubResource("RectangleShape2D_rqkxe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-55.0313, 574)
+shape = SubResource("RectangleShape2D_qsnje")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(804, 405)
+shape = SubResource("RectangleShape2D_rrl2k")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1028.5, 219.75)
+shape = SubResource("RectangleShape2D_qmn6l")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1574, 126)
+shape = SubResource("RectangleShape2D_b2tnl")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1581, -295)
+shape = SubResource("RectangleShape2D_gjcek")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1078, -527.156)
+shape = SubResource("RectangleShape2D_4rygq")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-491, -772)
+shape = SubResource("RectangleShape2D_m35lo")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-918, -328)
+shape = SubResource("RectangleShape2D_mwddn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="slide_walls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(418, -802)
+shape = SubResource("RectangleShape2D_x0dgm")
+
+[node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
+modulate = Color(0.37, 0.643, 1, 1)
+
+[node name="damage" type="StaticBody2D" parent="." groups=["collision", "env_damage"]]
+modulate = Color(0.37, 0.643, 1, 1)
+
+[node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
+position = Vector2(-914, 287)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_qsnje")
+room_path = "res://scenes/room_01.tscn"
+room_entry_index = 1
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_01"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -122)
+shape = SubResource("RectangleShape2D_dryon")
+debug_color = Color(0.7, 0.326667, 0, 0)
+
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+modulate = Color(0.25, 0.25, 0.25, 1)
+position = Vector2(237.635, -47.8364)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("3_rrl2k")
+size = 0.6
+layer = -3
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(118.817, -23.9182)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("3_rrl2k")
+size = 0.8
+layer = -1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+script = ExtResource("3_rrl2k")
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(-23.7634, 4.78363)
+scale = Vector2(1.04, 1.04)
+script = ExtResource("3_rrl2k")
+size = 1.04
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(-5.94086, 1.19591)
+scale = Vector2(1.01, 1.01)
+script = ExtResource("3_rrl2k")
+size = 1.01
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(-59.4086, 11.9591)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("3_rrl2k")
+size = 1.1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+
+[node name="ColorRect4" type="ColorRect" parent="black_shade"]
+material = SubResource("ShaderMaterial_a1hoc")
+offset_left = -235.0
+offset_top = -228.0
+offset_right = 221.0
+offset_bottom = 223.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+clip_children = 1
+color = Color(0.80704, 0.7663, 0.97, 1)

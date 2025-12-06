@@ -30,7 +30,7 @@ window/size/mode=4
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/scene_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/dublicate_unique/plugin.cfg", "res://addons/scene_editor/plugin.cfg")
 
 [global_group]
 
