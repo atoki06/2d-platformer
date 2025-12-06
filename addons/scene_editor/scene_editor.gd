@@ -5,6 +5,7 @@ var toolbar
 var overlay : Node2D
 var viewport
 var player
+var locked_layers = []
 
 
 func _enter_tree() -> void:
@@ -66,16 +67,25 @@ func _process(delta: float) -> void:
 		for i in scene.get_children():
 			if i.is_in_group("collision"):
 				i.visible = button2.collision
+				if button5.lock:
+					i.set_meta("_edit_lock_", null)
+				elif !locked_layers.has(i):
+					i.set_meta("_edit_lock_", true)
+				for child in i.get_children():
+					if button5.lock:
+						child.set_meta("_edit_lock_", null)
+					elif !locked_layers.has(i):
+						child.set_meta("_edit_lock_", true)
 		for i in scene.get_children():
 			if i.is_in_group("2d_sprites"):
 				if button5.lock:
 					i.set_meta("_edit_lock_", true)
-				else:
+				elif !locked_layers.has(i):
 					i.set_meta("_edit_lock_", null)
 				for child in i.get_children():
 					if button5.lock:
 						child.set_meta("_edit_lock_", true)
-					else:
+					elif !locked_layers.has(i):
 						child.set_meta("_edit_lock_", null)
 
 	
@@ -93,8 +103,12 @@ func _exit_tree() -> void:
 		for i in scene.get_children():
 			if i.is_in_group("collision"):
 				i.visible = false
+				i.set_meta("_edit_lock_", null)
+				for child in i.get_children():
+					child.set_meta("_edit_lock_", null)
 		for i in scene.get_children():
 			if i.is_in_group("2d_sprites"):
+				i.visible = true
 				i.set_meta("_edit_lock_", null)
 				for child in i.get_children():
 					child.set_meta("_edit_lock_", null)
@@ -195,12 +209,34 @@ func new_scene(scene):
 			button.set("theme_override_styles/pressed",style)
 			button.set("theme_override_styles/normal",style)
 			layermenu.add_child(button)
-			button.pressed.connect(set_layer.bind(button))
+			button.pressed.connect(set_layer.bind(button,layer,scene))
 		
-func set_layer(button):
+func set_layer(button,layer,scene):
+	var selected = true
 	var layermenu = toolbar.get_child(0).get_child(9).get_child(0)
 	for child in layermenu.get_children():
-		if child == button:
+		if child == button and child.modulate == Color(1.0, 1.0, 1.0):
 			child.modulate = Color(0.0, 0.6, 1.0)
 		else:
 			child.modulate = Color(1.0, 1.0, 1.0)
+		if child == button and child.modulate == Color(1.0, 1.0, 1.0):
+			selected = false
+	
+	var behind = true
+	for child in scene.get_children():
+		child.set_display_folded(true)
+		if child.is_in_group("sprite_layer") and child == layer or !selected:
+			child.visible = true
+			behind = false
+			child.set_meta("_edit_lock_", null)
+			for i in child.get_children():
+				i.set_meta("_edit_lock_", null)
+			if locked_layers.has(child):
+				locked_layers.erase(child)
+		elif child.is_in_group("sprite_layer"):
+			child.visible = behind
+			child.set_meta("_edit_lock_", true)
+			for i in child.get_children():
+				i.set_meta("_edit_lock_", true)
+			if !locked_layers.has(child):
+				locked_layers.append(child)
