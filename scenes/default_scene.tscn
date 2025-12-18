@@ -16,21 +16,17 @@ script = ExtResource("1_fh1ba")
 metadata/_custom_type_script = "uid://8gtxpiete45"
 
 [node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
-visible = false
 metadata/_edit_lock_ = true
 
 [node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
 metadata/_edit_lock_ = true
 
 [node name="damage" type="StaticBody2D" parent="." groups=["collision", "env_damage"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
 metadata/_edit_lock_ = true
 
 [node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
-visible = false
 position = Vector2(-914, 287)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
@@ -50,6 +46,8 @@ metadata/_edit_lock_ = true
 
 [node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.25, 0.25, 0.25, 1)
+position = Vector2(-132.816, 94.8487)
+scale = Vector2(0.6, 0.6)
 script = ExtResource("3_kedl7")
 size = 0.6
 layer = -3
@@ -57,6 +55,8 @@ metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
+position = Vector2(-66.4079, 47.4244)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("3_kedl7")
 size = 0.8
 layer = -1
@@ -67,16 +67,22 @@ script = ExtResource("3_kedl7")
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(13.2816, -9.48486)
+scale = Vector2(1.04, 1.04)
 script = ExtResource("3_kedl7")
 size = 1.04
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(3.3204, -2.37122)
+scale = Vector2(1.01, 1.01)
 script = ExtResource("3_kedl7")
 size = 1.01
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+position = Vector2(33.2039, -23.7122)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("3_kedl7")
 size = 1.1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"

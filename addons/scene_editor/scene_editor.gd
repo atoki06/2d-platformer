@@ -6,6 +6,8 @@ var overlay : Node2D
 var viewport : Node
 var player : Node
 var locked_layers : Array[Node] = []
+var line_thickness : float
+var selected_layer : Node
 
 
 func _enter_tree() -> void:
@@ -118,7 +120,7 @@ func draw():
 	var scene : Node = get_tree().get_edited_scene_root()
 	var camera : Transform2D = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
 	var viewport_size : Vector2i = get_editor_interface().get_editor_viewport_2d().size
-	var line_thickness : float = 1.0 / ((camera[0].x + camera[0].y))
+	line_thickness = 1.0 / ((camera[0].x + camera[0].y))
 		
 	var button2 : Node = toolbar.get_child(0).get_child(3).get_child(0)
 	var button3 : Node = toolbar.get_child(0).get_child(5)
@@ -178,7 +180,23 @@ func draw():
 							polygon[point] += pos
 						overlay.draw_polyline(polygon, color, line_thickness, true)
 						overlay.draw_line(polygon[0], polygon[polygon.size() - 1], color, line_thickness, true)
+	draw_near_mouse()
 						
+func draw_near_mouse():
+	var scene : Node = get_tree().get_edited_scene_root()
+	var position = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
+	var camera = get_editor_interface().get_editor_viewport_2d().get_viewport()
+	#overlay.draw_circle(position, 100, Color.WHITE, true)
+	const dist = 350
+	if scene:
+		for layer in scene.get_children():
+			if layer.is_in_group("sprite_layer") and layer == selected_layer:
+				for child in layer.get_children():
+					var pos = child.global_position
+					var distance = pos.distance_to(position)
+					if distance < dist:
+						overlay.draw_circle(child.global_position,line_thickness * 2,Color(1,1,1,1 - distance / dist))
+	
 					
 func new_scene(scene):
 	var layermenu : Node = toolbar.get_child(0).get_child(9).get_child(0)
@@ -203,10 +221,12 @@ func set_layer(button,layer,scene):
 	for child in layermenu.get_children():
 		if child == button and child.modulate == Color(1.0, 1.0, 1.0):
 			child.modulate = Color(0.0, 0.6, 1.0)
+			selected_layer = layer
 		else:
 			child.modulate = Color(1.0, 1.0, 1.0)
 		if child == button and child.modulate == Color(1.0, 1.0, 1.0):
 			selected = false
+			selected_layer = null
 	
 	var behind : bool = true
 	for child in scene.get_children():

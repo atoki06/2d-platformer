@@ -96,10 +96,10 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="black_fog" type="ColorRect" parent="."]
 z_index = 10
 material = SubResource("ShaderMaterial_smehm")
-offset_left = -2246.0
-offset_top = -1602.0
-offset_right = 2244.0
-offset_bottom = 1403.0
+offset_left = -3000.0
+offset_top = -2000.0
+offset_right = 3000.0
+offset_bottom = 2000.0
 color = Color(0, 0, 0, 1)
 
 [node name="camera" type="Camera2D" parent="."]

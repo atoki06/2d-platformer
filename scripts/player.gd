@@ -189,6 +189,7 @@ func _physics_process(delta: float) -> void:
 	var cam_pos_y = clamp(global_position.y,room.margin_min.y * 100,room.margin_max.y * 100)
 	var camera_direction = (Vector2(cam_pos_x,cam_pos_y) + camera_position - camera.global_position)
 	camera.global_position += camera_direction * delta * camera_speed
+	camera.global_position = Vector2(snapped(camera.global_position.x,1),snapped(camera.global_position.y,1))
 	#if new_room:
 	#	new_room = false
 	#	camera.global_position = Vector2(cam_pos_x,cam_pos_y) + camera_position
