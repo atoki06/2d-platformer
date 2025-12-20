@@ -132,7 +132,7 @@ modulate = Color(0.37, 0.643, 1, 1)
 metadata/_edit_lock_ = true
 
 [node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
-position = Vector2(-914, 287)
+position = Vector2(-891, 322)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
 gravity = 9.8
@@ -149,10 +149,27 @@ shape = SubResource("RectangleShape2D_dryon")
 debug_color = Color(0.7, 0.326667, 0, 0)
 metadata/_edit_lock_ = true
 
+[node name="exit_02" type="Area2D" parent="." groups=["collision", "exit"]]
+position = Vector2(1972, 77)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 9.8
+angular_damp = 0.1
+script = ExtResource("2_qsnje")
+index = 1
+direction = 1
+room_path = "res://scenes/room_01.tscn"
+metadata/_edit_lock_ = true
+
+[node name="hitbox" type="CollisionShape2D" parent="exit_02"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -122)
+shape = SubResource("RectangleShape2D_dryon")
+debug_color = Color(0.7, 0.326667, 0, 0)
+metadata/_edit_lock_ = true
+
 [node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.25, 0.25, 0.25, 1)
-position = Vector2(-9.90039, -11.4676)
-scale = Vector2(0.6, 0.6)
 script = ExtResource("3_rrl2k")
 size = 0.6
 layer = -3
@@ -161,8 +178,6 @@ metadata/_edit_lock_ = true
 
 [node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(-4.9502, -5.73381)
-scale = Vector2(0.8, 0.8)
 script = ExtResource("3_rrl2k")
 size = 0.8
 layer = -1
@@ -255,7 +270,7 @@ flip_x = true
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite37" type="Node2D" parent="mainlayer"]
-position = Vector2(-904, -353)
+position = Vector2(-911.596, -353)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -263,7 +278,7 @@ flip_x = true
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite38" type="Node2D" parent="mainlayer"]
-position = Vector2(-909, -601)
+position = Vector2(-911.09, -616.406)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -271,14 +286,14 @@ flip_x = true
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite21" type="Node2D" parent="mainlayer"]
-position = Vector2(1086, -389)
+position = Vector2(1080.15, -396.795)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite30" type="Node2D" parent="mainlayer"]
-position = Vector2(1098, -646)
+position = Vector2(1086.97, -652.973)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -313,7 +328,7 @@ size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite42" type="Node2D" parent="mainlayer"]
-position = Vector2(-1024, -220)
+position = Vector2(-1042.99, -220)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -410,13 +425,6 @@ texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
-[node name="EnvironmentSprite17" type="Node2D" parent="mainlayer"]
-position = Vector2(1973, 205)
-script = ExtResource("4_rrl2k")
-texture = ExtResource("5_qmn6l")
-size = Vector2(0.4, 0.4)
-metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
-
 [node name="EnvironmentSprite18" type="Node2D" parent="mainlayer"]
 position = Vector2(1708, 217)
 script = ExtResource("4_rrl2k")
@@ -439,14 +447,14 @@ size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite22" type="Node2D" parent="mainlayer"]
-position = Vector2(1137, -312)
+position = Vector2(1131.15, -319.795)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite23" type="Node2D" parent="mainlayer"]
-position = Vector2(1428, -317)
+position = Vector2(1422.15, -324.795)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -467,7 +475,7 @@ size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite26" type="Node2D" parent="mainlayer"]
-position = Vector2(1726, -434)
+position = Vector2(1700.29, -428.616)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -481,28 +489,28 @@ size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite27" type="Node2D" parent="mainlayer"]
-position = Vector2(1441, -422)
+position = Vector2(1435.15, -429.795)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite28" type="Node2D" parent="mainlayer"]
-position = Vector2(1158, -428)
+position = Vector2(1152.15, -435.795)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite31" type="Node2D" parent="mainlayer"]
-position = Vector2(1150, -559)
+position = Vector2(1186, -561)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite33" type="Node2D" parent="mainlayer"]
-position = Vector2(1139, -689)
+position = Vector2(1209, -705)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -524,8 +532,6 @@ metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 visible = false
-position = Vector2(0.990038, 1.14676)
-scale = Vector2(1.04, 1.04)
 script = ExtResource("3_rrl2k")
 size = 1.04
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
@@ -533,8 +539,6 @@ metadata/_edit_lock_ = true
 
 [node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 visible = false
-position = Vector2(0.247509, 0.28669)
-scale = Vector2(1.01, 1.01)
 script = ExtResource("3_rrl2k")
 size = 1.01
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
@@ -542,8 +546,6 @@ metadata/_edit_lock_ = true
 
 [node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 visible = false
-position = Vector2(2.4751, 2.86691)
-scale = Vector2(1.1, 1.1)
 script = ExtResource("3_rrl2k")
 size = 1.1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
@@ -560,4 +562,3 @@ metadata/_edit_lock_ = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 clip_children = 1
 color = Color(0.80704, 0.7663, 0.97, 1)
-metadata/_edit_lock_ = true

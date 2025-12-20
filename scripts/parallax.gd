@@ -18,4 +18,4 @@ func _process(delta: float) -> void:
 			var child_size = child.size
 			if child.flip_x:
 				child_size.x *= -1
-			rs.canvas_item_add_texture_rect(sprite_instance,Rect2(child.position - (Vector2(abs(child_size.x),abs(child_size.y)) * size) / 2,child_size * size),child.texture)
+			rs.canvas_item_add_texture_rect(sprite_instance,Rect2(child.position - (Vector2(abs(child_size.x),abs(child_size.y)) * size) / 2,child_size * size),child.texture, false, child.color)

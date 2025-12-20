@@ -1,17 +1,31 @@
 @tool
 extends EditorPlugin
 
+#undo redo
 var toolbar : Node
 var overlay : Node2D
 var viewport : Node
+var scene : Node
 var player : Node
 var locked_layers : Array[Node] = []
 var line_thickness : float
 var selected_layer : Node
+var labels: Array[Node] = []
+
+var dragging : bool = false
+var dragging_position : Vector2
+var viewport_type : String
+const dragging_distance : float = 200
+var last_mouse_position : Vector2
+var last_selection : Array[Node]
+var buttons_down : Array[int] = []
+var undo_nr : int = 0
+var undo_positions : Array[Vector2]
 
 
 func _enter_tree() -> void:
-	var scene : Node = get_tree().get_edited_scene_root()
+	
+	scene = get_tree().get_edited_scene_root()
 	scene_changed.connect(new_scene)
 	toolbar = preload("res://addons/scene_editor/control.tscn").instantiate()
 	toolbar.name = "Scene Editor"
@@ -24,13 +38,14 @@ func _enter_tree() -> void:
 	player = preload("res://scenes/player.tscn").instantiate()
 	player.name = "player_ghost"
 	viewport.add_child(player)
+	main_screen_changed.connect(set_viewport)
 	
 	new_scene(scene)
 
 	
 func _process(delta: float) -> void:
 	overlay.queue_redraw()
-	var scene : Node = get_tree().get_edited_scene_root()
+	scene = get_tree().get_edited_scene_root()
 	var camera : Transform2D = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
 	var viewport_size : Vector2i = get_editor_interface().get_editor_viewport_2d().size
 	
@@ -84,6 +99,19 @@ func _process(delta: float) -> void:
 						child.set_meta("_edit_lock_", true)
 					elif !locked_layers.has(i):
 						child.set_meta("_edit_lock_", null)
+	
+	for i in range(labels.size()):
+		labels.pop_at(0).queue_free()
+	
+	
+	for exit in scene.get_children():
+		if exit.is_in_group("exit"):
+			var label = Label.new()
+			labels.append(label)
+			label.text = str(exit.index) + " --> " + str(exit.room_entry_index)
+			viewport.add_child(label)
+			label.scale *= 2
+			label.global_position = exit.global_position + Vector2(-label.size.x,-150)
 
 	
 	
@@ -117,15 +145,15 @@ func _exit_tree() -> void:
 		player.free()
 	
 func draw():
-	var scene : Node = get_tree().get_edited_scene_root()
 	var camera : Transform2D = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
 	var viewport_size : Vector2i = get_editor_interface().get_editor_viewport_2d().size
+	var selection : Array[Node] = get_editor_interface().get_selection().get_selected_nodes()
 	line_thickness = 1.0 / ((camera[0].x + camera[0].y))
 		
 	var button2 : Node = toolbar.get_child(0).get_child(3).get_child(0)
 	var button3 : Node = toolbar.get_child(0).get_child(5)
 	var button4 : Node = toolbar.get_child(0).get_child(7)
-
+	
 	if player and scene and scene.is_in_group("room"):
 		if button4.player:
 			var pos : Vector2 = player.global_position - Vector2(0.0,100)
@@ -181,19 +209,33 @@ func draw():
 						overlay.draw_polyline(polygon, color, line_thickness, true)
 						overlay.draw_line(polygon[0], polygon[polygon.size() - 1], color, line_thickness, true)
 	draw_near_mouse()
+	var max : Vector2
+	var min : Vector2
+	for i in selection:
+		var pos = i.global_position
+		if !max:
+			max = pos
+		if !min:
+			min = pos
+		max.x = max(pos.x,max.x)
+		min.x = min(pos.x,min.x)
+		max.y = max(pos.y,max.y)
+		min.y = min(pos.y,min.y)
+	if selection:
+		var rect = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
+		overlay.draw_rect(rect, Color(1.0,1.0,1.0,0.2))
+		
+
 						
 func draw_near_mouse():
-	var scene : Node = get_tree().get_edited_scene_root()
-	var position = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
-	var camera = get_editor_interface().get_editor_viewport_2d().get_viewport()
-	#overlay.draw_circle(position, 100, Color.WHITE, true)
+	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
 	const dist = 350
 	if scene:
 		for layer in scene.get_children():
 			if layer.is_in_group("sprite_layer") and layer == selected_layer:
 				for child in layer.get_children():
 					var pos = child.global_position
-					var distance = pos.distance_to(position)
+					var distance = pos.distance_to(mouse)
 					if distance < dist:
 						overlay.draw_circle(child.global_position,line_thickness * 2,Color(1,1,1,1 - distance / dist))
 	
@@ -246,3 +288,115 @@ func set_layer(button,layer,scene):
 				i.set_meta("_edit_lock_", true)
 			if !locked_layers.has(child):
 				locked_layers.append(child)
+				
+func change_mode():
+	var selection = get_editor_interface().get_selection()
+	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
+	var cancel_event = InputEventAction.new()
+	cancel_event.action = "Alt + W"
+	cancel_event.pressed = true
+	Input.parse_input_event(cancel_event)
+	var command = get_editor_interface()
+	
+
+func _input(event: InputEvent) -> void:
+	if viewport_type != "2D":
+		return
+	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
+	var selection = get_editor_interface().get_selection().get_selected_nodes()
+	var undo = get_editor_interface().get_editor_undo_redo()
+	var near = false
+	const distance = 500
+	var index
+	if event is InputEventMouseButton:
+		index = event.button_index
+	
+	var max : Vector2
+	var min : Vector2
+	for i in selection:
+		var pos = i.global_position
+		if !max:
+			max = pos
+		if !min:
+			min = pos
+		max.x = max(pos.x,max.x)
+		min.x = min(pos.x,min.x)
+		max.y = max(pos.y,max.y)
+		min.y = min(pos.y,min.y)
+	var rect = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
+	var rect_mouse = Rect2(mouse,Vector2(0,0))
+	
+	for i in selection:
+		if rect.intersects(rect_mouse):
+			near = true
+	
+	if event is InputEventMouseButton:
+		if event.is_pressed() and !buttons_down.has(event.button_index):
+			buttons_down.append(event.button_index)
+		if !event.is_pressed() and buttons_down.has(event.button_index):
+			buttons_down.erase(event.button_index)
+		
+		
+		var handled = false
+		if index == MOUSE_BUTTON_RIGHT:
+				handled = true
+		if selection and !near:
+			handled = true
+		if near:
+			handled = true
+		if index == MOUSE_BUTTON_LEFT and selection:
+			handled = true
+		if index == MOUSE_BUTTON_WHEEL_DOWN or index == MOUSE_BUTTON_WHEEL_UP or index == MOUSE_BUTTON_MIDDLE:
+			handled = false
+	
+		if handled:
+			get_viewport().set_input_as_handled()
+		
+		if index == MOUSE_BUTTON_LEFT and selection and !near:
+			get_editor_interface().get_selection().clear()
+		
+		if index == MOUSE_BUTTON_RIGHT:
+			get_editor_interface().get_selection().clear()
+		
+		if index == MOUSE_BUTTON_LEFT:
+			if event.is_pressed() and near and selection == last_selection and selection != []:
+				dragging = true
+				undo_nr += 1
+				undo_positions = []
+				for i in selection:
+					undo_positions.append(i.global_position)
+			elif !event.is_pressed():
+				dragging = false
+				
+	
+	if event is InputEventMouseMotion:
+		var handled = false
+		if selection and !near:
+			handled = true
+		if selection:
+			handled = true
+		if buttons_down.has(MOUSE_BUTTON_MIDDLE):
+			handled = false
+	
+		if handled:
+			get_viewport().set_input_as_handled()
+	
+	var node_index = 0
+	if dragging:
+		for node in selection:
+			var last_position = undo_positions[node_index]
+			change_position("position changed" + str(undo_nr), node, "global_position", node.global_position + mouse - last_mouse_position, last_position)
+			node_index += 1
+			#i.global_position += mouse - last_mouse_position
+	last_mouse_position = mouse
+	last_selection = selection
+		
+func set_viewport(type : String):
+	viewport_type = type
+
+func change_position(undo_name : String, node : Node, property : String, last_value, new_value):
+	var undo_redo = get_editor_interface().get_editor_undo_redo()
+	undo_redo.create_action(undo_name, UndoRedo.MERGE_ALL)
+	undo_redo.add_do_property(node, property, last_value)
+	undo_redo.add_undo_property(node, property, new_value)
+	undo_redo.commit_action()
