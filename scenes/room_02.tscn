@@ -270,7 +270,7 @@ flip_x = true
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite37" type="Node2D" parent="mainlayer"]
-position = Vector2(-911.596, -353)
+position = Vector2(-919.265, -357.281)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -278,7 +278,7 @@ flip_x = true
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite38" type="Node2D" parent="mainlayer"]
-position = Vector2(-911.09, -616.406)
+position = Vector2(-918.759, -620.686)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -303,6 +303,140 @@ metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 position = Vector2(1061, 228)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("6_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite17" type="Node2D" parent="mainlayer"]
+position = Vector2(-860.449, -703.076)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite50" type="Node2D" parent="mainlayer"]
+position = Vector2(-580.638, -705.175)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite51" type="Node2D" parent="mainlayer"]
+position = Vector2(-301.168, -710.871)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite53" type="Node2D" parent="mainlayer"]
+position = Vector2(-205.681, -779.076)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+flip_x = true
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite52" type="Node2D" parent="mainlayer"]
+position = Vector2(-83.7153, -796.764)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite54" type="Node2D" parent="mainlayer"]
+position = Vector2(-379.92, -810.405)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite55" type="Node2D" parent="mainlayer"]
+position = Vector2(-623.51, -777.277)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite56" type="Node2D" parent="mainlayer"]
+position = Vector2(-845.664, -790.918)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite57" type="Node2D" parent="mainlayer"]
+position = Vector2(172.97, -800.35)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite58" type="Node2D" parent="mainlayer"]
+position = Vector2(453.565, -802.708)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite59" type="Node2D" parent="mainlayer"]
+position = Vector2(731.803, -802.708)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite60" type="Node2D" parent="mainlayer"]
+position = Vector2(1002.97, -807.423)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite61" type="Node2D" parent="mainlayer"]
+position = Vector2(894.501, -873.446)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite62" type="Node2D" parent="mainlayer"]
+position = Vector2(675.212, -854.583)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite63" type="Node2D" parent="mainlayer"]
+position = Vector2(465.355, -889.952)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite64" type="Node2D" parent="mainlayer"]
+position = Vector2(290.867, -868.73)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite65" type="Node2D" parent="mainlayer"]
+position = Vector2(-3.87646, -901.742)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite66" type="Node2D" parent="mainlayer"]
+position = Vector2(-216.092, -861.657)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite67" type="Node2D" parent="mainlayer"]
+position = Vector2(-609.869, -833.362)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
@@ -335,7 +469,7 @@ size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite43" type="Node2D" parent="mainlayer"]
-position = Vector2(-1011, -355)
+position = Vector2(-1018.67, -359.281)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
@@ -516,6 +650,62 @@ texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
+[node name="EnvironmentSprite68" type="Node2D" parent="mainlayer"]
+position = Vector2(1267.69, -642.859)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite69" type="Node2D" parent="mainlayer"]
+position = Vector2(1391.97, -549.648)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite70" type="Node2D" parent="mainlayer"]
+position = Vector2(1505.9, -446.08)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite71" type="Node2D" parent="mainlayer"]
+position = Vector2(1768.27, -480.602)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite72" type="Node2D" parent="mainlayer"]
+position = Vector2(1464.47, 261.636)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite73" type="Node2D" parent="mainlayer"]
+position = Vector2(1291.86, 306.516)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite74" type="Node2D" parent="mainlayer"]
+position = Vector2(1133.05, 420.44)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite75" type="Node2D" parent="mainlayer"]
+position = Vector2(860.321, 634.481)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
 [node name="EnvironmentSprite11" type="Node2D" parent="mainlayer"]
 position = Vector2(773, 637)
 script = ExtResource("4_rrl2k")
@@ -525,6 +715,55 @@ metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 
 [node name="EnvironmentSprite12" type="Node2D" parent="mainlayer"]
 position = Vector2(481, 629)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite76" type="Node2D" parent="mainlayer"]
+position = Vector2(556.521, 710.431)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite77" type="Node2D" parent="mainlayer"]
+position = Vector2(269.982, 675.909)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite78" type="Node2D" parent="mainlayer"]
+position = Vector2(83.5596, 734.597)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite79" type="Node2D" parent="mainlayer"]
+position = Vector2(-133.934, 696.622)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite80" type="Node2D" parent="mainlayer"]
+position = Vector2(-368.688, 734.597)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite81" type="Node2D" parent="mainlayer"]
+position = Vector2(-751.89, 669.004)
+script = ExtResource("4_rrl2k")
+texture = ExtResource("5_qmn6l")
+size = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+
+[node name="EnvironmentSprite82" type="Node2D" parent="mainlayer"]
+position = Vector2(-1031.52, 496.391)
 script = ExtResource("4_rrl2k")
 texture = ExtResource("5_qmn6l")
 size = Vector2(0.4, 0.4)

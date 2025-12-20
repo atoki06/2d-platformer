@@ -223,7 +223,7 @@ func draw():
 		min.y = min(pos.y,min.y)
 	if selection:
 		var rect = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
-		overlay.draw_rect(rect, Color(1.0,1.0,1.0,0.2))
+		overlay.draw_rect(rect, Color(1.0,1.0,1.0,0.5), false , line_thickness)
 		
 
 						
@@ -302,12 +302,18 @@ func change_mode():
 func _input(event: InputEvent) -> void:
 	if viewport_type != "2D":
 		return
+	var camera = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
+	var viewport = get_editor_interface().get_editor_viewport_2d()
 	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
 	var selection = get_editor_interface().get_selection().get_selected_nodes()
 	var undo = get_editor_interface().get_editor_undo_redo()
 	var near = false
 	const distance = 500
 	var index
+	
+	var viewport_position = -camera[2] / Vector2(camera[0].x,camera[1].y)
+	var is_mouse_in_viewport = Rect2(viewport_position, viewport.size / camera[1].y).has_point(mouse)
+	
 	if event is InputEventMouseButton:
 		index = event.button_index
 	
@@ -330,6 +336,7 @@ func _input(event: InputEvent) -> void:
 		if rect.intersects(rect_mouse):
 			near = true
 	
+	var handled = false
 	if event is InputEventMouseButton:
 		if event.is_pressed() and !buttons_down.has(event.button_index):
 			buttons_down.append(event.button_index)
@@ -337,7 +344,6 @@ func _input(event: InputEvent) -> void:
 			buttons_down.erase(event.button_index)
 		
 		
-		var handled = false
 		if index == MOUSE_BUTTON_RIGHT:
 				handled = true
 		if selection and !near:
@@ -349,14 +355,12 @@ func _input(event: InputEvent) -> void:
 		if index == MOUSE_BUTTON_WHEEL_DOWN or index == MOUSE_BUTTON_WHEEL_UP or index == MOUSE_BUTTON_MIDDLE:
 			handled = false
 	
-		if handled:
-			get_viewport().set_input_as_handled()
-		
-		if index == MOUSE_BUTTON_LEFT and selection and !near:
-			get_editor_interface().get_selection().clear()
-		
-		if index == MOUSE_BUTTON_RIGHT:
-			get_editor_interface().get_selection().clear()
+		if is_mouse_in_viewport:
+			if index == MOUSE_BUTTON_LEFT and selection and !near:
+				get_editor_interface().get_selection().clear()
+			
+			if index == MOUSE_BUTTON_RIGHT:
+				get_editor_interface().get_selection().clear()
 		
 		if index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed() and near and selection == last_selection and selection != []:
@@ -370,7 +374,6 @@ func _input(event: InputEvent) -> void:
 				
 	
 	if event is InputEventMouseMotion:
-		var handled = false
 		if selection and !near:
 			handled = true
 		if selection:
@@ -378,11 +381,20 @@ func _input(event: InputEvent) -> void:
 		if buttons_down.has(MOUSE_BUTTON_MIDDLE):
 			handled = false
 	
-		if handled:
-			get_viewport().set_input_as_handled()
+	if !is_mouse_in_viewport and event is InputEventMouseButton:
+		handled = false
+		
+	if !is_mouse_in_viewport and event is InputEventMouseMotion and buttons_down.has(MOUSE_BUTTON_LEFT):
+		handled = false
+	
+	if event is InputEventMouseButton and !near and buttons_down.has(MOUSE_BUTTON_LEFT):
+		handled = false
+		
+	if handled:
+		get_viewport().set_input_as_handled()
 	
 	var node_index = 0
-	if dragging:
+	if dragging and is_mouse_in_viewport:
 		for node in selection:
 			var last_position = undo_positions[node_index]
 			change_position("position changed" + str(undo_nr), node, "global_position", node.global_position + mouse - last_mouse_position, last_position)
