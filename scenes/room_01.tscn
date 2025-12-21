@@ -26,6 +26,7 @@ margin_max = Vector2(1.96, -0.17)
 metadata/_edit_lock_ = true
 
 [node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
+visible = false
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon3D" type="CollisionPolygon2D" parent="slide_walls"]
@@ -42,6 +43,7 @@ polygon = PackedVector2Array(524, -654, 538, -214, 562, -159, 569, 63, 265, 59, 
 metadata/_edit_lock_ = true
 
 [node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
+visible = false
 modulate = Color(0.37, 0.643, 1, 1)
 metadata/_edit_lock_ = true
 
@@ -53,6 +55,7 @@ shape = SubResource("RectangleShape2D_lb5by")
 metadata/_edit_lock_ = true
 
 [node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
+visible = false
 position = Vector2(-914, 287)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
@@ -70,6 +73,7 @@ shape = SubResource("RectangleShape2D_dryon")
 metadata/_edit_lock_ = true
 
 [node name="exit_02" type="Area2D" parent="." groups=["collision", "exit"]]
+visible = false
 position = Vector2(999, 290)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
@@ -90,7 +94,7 @@ metadata/_edit_lock_ = true
 [node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.333333, 0.333333, 0.333333, 1)
 z_index = -1
-position = Vector2(58.3076, -74.1971)
+position = Vector2(28.2533, -46.8161)
 scale = Vector2(0.6, 0.6)
 script = ExtResource("3_cyfwn")
 size = 0.6
@@ -459,7 +463,7 @@ flip_h = true
 [node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
 z_index = -1
-position = Vector2(24.7807, -31.5338)
+position = Vector2(12.0076, -19.8968)
 scale = Vector2(0.83, 0.83)
 script = ExtResource("3_cyfwn")
 size = 0.83
@@ -1186,7 +1190,7 @@ texture = ExtResource("5_cyfwn")
 flip_h = true
 
 [node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-5.83075, 7.41969)
+position = Vector2(-2.82533, 4.6816)
 scale = Vector2(1.04, 1.04)
 script = ExtResource("3_cyfwn")
 size = 1.04
@@ -1267,7 +1271,7 @@ texture = ExtResource("5_cyfwn")
 flip_h = true
 
 [node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-14.5769, 18.5493)
+position = Vector2(-7.06332, 11.704)
 scale = Vector2(1.1, 1.1)
 script = ExtResource("3_cyfwn")
 size = 1.1
@@ -1315,7 +1319,7 @@ texture = ExtResource("5_cyfwn")
 flip_h = true
 
 [node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-14.5769, 18.5493)
+position = Vector2(-7.06332, 11.704)
 scale = Vector2(1.1, 1.1)
 script = ExtResource("3_cyfwn")
 size = 1.1

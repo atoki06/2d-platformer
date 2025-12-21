@@ -11,6 +11,8 @@ var locked_layers : Array[Node] = []
 var line_thickness : float
 var selected_layer : Node
 var labels: Array[Node] = []
+var buttons: Array[Node] = []
+var button_scenes : Array = []
 
 var dragging : bool = false
 var dragging_position : Vector2
@@ -22,9 +24,7 @@ var buttons_down : Array[int] = []
 var undo_nr : int = 0
 var undo_positions : Array[Vector2]
 
-
 func _enter_tree() -> void:
-	
 	scene = get_tree().get_edited_scene_root()
 	scene_changed.connect(new_scene)
 	toolbar = preload("res://addons/scene_editor/control.tscn").instantiate()
@@ -42,7 +42,7 @@ func _enter_tree() -> void:
 	
 	new_scene(scene)
 
-	
+
 func _process(delta: float) -> void:
 	overlay.queue_redraw()
 	scene = get_tree().get_edited_scene_root()
@@ -100,22 +100,17 @@ func _process(delta: float) -> void:
 					elif !locked_layers.has(i):
 						child.set_meta("_edit_lock_", null)
 	
+	create_exit_overlay()
+	
+func _exit_tree() -> void:
+	
 	for i in range(labels.size()):
 		labels.pop_at(0).queue_free()
 	
-	
-	for exit in scene.get_children():
-		if exit.is_in_group("exit"):
-			var label = Label.new()
-			labels.append(label)
-			label.text = str(exit.index) + " --> " + str(exit.room_entry_index)
-			viewport.add_child(label)
-			label.scale *= 2
-			label.global_position = exit.global_position + Vector2(-label.size.x,-150)
+	for i in range(buttons.size()):
+		buttons.pop_at(0).queue_free()
+		
 
-	
-	
-func _exit_tree() -> void:
 	var scene : Node = get_tree().get_edited_scene_root()
 	if scene:
 		for i in scene.get_children():
@@ -211,17 +206,20 @@ func draw():
 	draw_near_mouse()
 	var max : Vector2
 	var min : Vector2
+	var sprite = false
 	for i in selection:
-		var pos = i.global_position
-		if !max:
-			max = pos
-		if !min:
-			min = pos
-		max.x = max(pos.x,max.x)
-		min.x = min(pos.x,min.x)
-		max.y = max(pos.y,max.y)
-		min.y = min(pos.y,min.y)
-	if selection:
+		if i is EnvironmentSprite:
+			sprite = true
+			var pos = i.global_position
+			if !max:
+				max = pos
+			if !min:
+				min = pos
+			max.x = max(pos.x,max.x)
+			min.x = min(pos.x,min.x)
+			max.y = max(pos.y,max.y)
+			min.y = min(pos.y,min.y)
+	if selection and sprite:
 		var rect = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
 		overlay.draw_rect(rect, Color(1.0,1.0,1.0,0.5), false , line_thickness)
 		
@@ -300,12 +298,15 @@ func change_mode():
 	
 
 func _input(event: InputEvent) -> void:
+	var selection = get_editor_interface().get_selection().get_selected_nodes()
+	for i in selection:
+		if !i is EnvironmentSprite:
+			return
 	if viewport_type != "2D":
 		return
 	var camera = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
 	var viewport = get_editor_interface().get_editor_viewport_2d()
 	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
-	var selection = get_editor_interface().get_selection().get_selected_nodes()
 	var undo = get_editor_interface().get_editor_undo_redo()
 	var near = false
 	const distance = 500
@@ -400,6 +401,12 @@ func _input(event: InputEvent) -> void:
 			change_position("position changed" + str(undo_nr), node, "global_position", node.global_position + mouse - last_mouse_position, last_position)
 			node_index += 1
 			#i.global_position += mouse - last_mouse_position
+	for button in buttons:
+		var button_rect = Rect2(button.global_position ,button.size * button.scale)
+		if button_rect.has_point(mouse) and buttons_down.has(MOUSE_BUTTON_LEFT):
+			switch_scene(button_scenes[buttons.find(button)])
+	
+	
 	last_mouse_position = mouse
 	last_selection = selection
 		
@@ -412,3 +419,40 @@ func change_position(undo_name : String, node : Node, property : String, last_va
 	undo_redo.add_do_property(node, property, last_value)
 	undo_redo.add_undo_property(node, property, new_value)
 	undo_redo.commit_action()
+	
+func create_exit_overlay():
+	for i in range(labels.size()):
+		labels.pop_at(0).queue_free()
+	
+	for i in range(buttons.size()):
+		buttons.pop_at(0).queue_free()
+		
+	for i in range(button_scenes.size()):
+		button_scenes.pop_at(0)
+	
+	if !scene:
+		return
+	for exit in scene.get_children():
+		if exit.is_in_group("exit"):
+			var label = Label.new()
+			labels.append(label)
+			label.text = str(exit.index) + " --> " + str(exit.room_entry_index)
+			viewport.add_child(label)
+			label.scale *= 2
+			label.global_position = exit.global_position + Vector2(-label.size.x,-175)
+			label.z_index = 100
+			var exit_button = Button.new()
+			buttons.append(exit_button)
+			button_scenes.append(exit.room_path)
+			exit_button.text = exit.room_path
+			viewport.add_child(exit_button)
+			exit_button.scale *= 2
+			exit_button.size.y = 50
+			exit_button.global_position = exit.global_position + Vector2(-label.size.x,-125)
+			exit_button.z_index = 100
+			
+
+func switch_scene(scene):
+	get_editor_interface().open_scene_from_path(scene)
+
+		
