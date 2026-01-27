@@ -40,6 +40,7 @@ func _enter_tree() -> void:
 	viewport.add_child(player)
 	main_screen_changed.connect(set_viewport)
 	
+	
 	new_scene(scene)
 
 
@@ -58,12 +59,15 @@ func _process(delta: float) -> void:
 	if player and scene:
 		player.global_position = -camera[2] / Vector2(camera[0].x,camera[1].y) + Vector2(viewport_size) / 2 / camera[1].y + Vector2(0,100)
 		player.visible = button4.player and scene.is_in_group("room")
-	
-	if button.parallax:
+		for child in player.get_children():
+			if child is Camera2D:
+				child.self_modulate = Color(1,1,1,0)
+
+		
+	if button.parallax and scene:
 		for i in scene.get_children():
 			if i.is_in_group("parallax"):
 				var pos : Vector2 = -camera[2] / Vector2(camera[0].x,camera[1].y) + viewport_size / 2 / camera[1].y
-
 				i.global_position = pos - pos * i.size
 				i.scale = Vector2(1,1) * i.size
 				var x : float = 1.0 / max(i.layer * -1 + 1, 1)
@@ -152,7 +156,7 @@ func draw():
 	if player and scene and scene.is_in_group("room"):
 		if button4.player:
 			var pos : Vector2 = player.global_position - Vector2(0.0,100)
-			var size : Vector2 = Vector2(DisplayServer.screen_get_size() / 2.0  / 0.6)
+			var size : Vector2 = Vector2(DisplayServer.screen_get_size() / 2.0)
 			
 			overlay.draw_line(pos - size, pos + size * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
 			overlay.draw_line(pos + size, pos - size * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
@@ -162,7 +166,7 @@ func draw():
 	if scene and scene.is_in_group("room") and button3.margin:
 		var margin_min : Vector2 = scene.margin_min * 100
 		var margin_max : Vector2 = scene.margin_max * 100
-		var cam_radius : Vector2 = Vector2(DisplayServer.screen_get_size() / 2  / 0.6)
+		var cam_radius : Vector2 = Vector2(DisplayServer.screen_get_size() / 2)
 		overlay.draw_line(margin_min - cam_radius, Vector2(margin_max.x,margin_min.y) + cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
 		overlay.draw_line(margin_max + cam_radius, Vector2(margin_min.x,margin_max.y) - cam_radius * Vector2(1,-1), Color(1.0, 0.0, 0.0), line_thickness, true)
 		overlay.draw_line(margin_min - cam_radius, Vector2(margin_min.x,margin_max.y) + cam_radius * Vector2(-1,1), Color(1.0, 0.0, 0.0), line_thickness, true)
@@ -238,12 +242,13 @@ func draw_near_mouse():
 						overlay.draw_circle(child.global_position,line_thickness * 2,Color(1,1,1,1 - distance / dist))
 	
 					
-func new_scene(scene):
+func new_scene(scene) -> void:
+	if !scene: return
 	var layermenu : Node = toolbar.get_child(0).get_child(9).get_child(0)
 	for child in layermenu.get_children():
 		child.queue_free()
 		
-	for layer in scene.get_children():
+	for layer : Node in scene.get_children():
 		if layer.is_in_group("sprite_layer"):
 			var button : Button = Button.new()
 			button.text = layer.name
@@ -255,7 +260,7 @@ func new_scene(scene):
 			layermenu.add_child(button)
 			button.pressed.connect(set_layer.bind(button,layer,scene))
 		
-func set_layer(button,layer,scene):
+func set_layer(button,layer,scene) -> void:
 	var selected : bool = true
 	var layermenu : Node = toolbar.get_child(0).get_child(9).get_child(0)
 	for child in layermenu.get_children():
@@ -287,10 +292,10 @@ func set_layer(button,layer,scene):
 			if !locked_layers.has(child):
 				locked_layers.append(child)
 				
-func change_mode():
-	var selection = get_editor_interface().get_selection()
-	var mouse = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
-	var cancel_event = InputEventAction.new()
+func change_mode() -> void:
+	var selection : EditorSelection = get_editor_interface().get_selection()
+	var mouse : Vector2 = get_editor_interface().get_editor_viewport_2d().get_mouse_position()
+	var cancel_event : InputEventAction = InputEventAction.new()
 	cancel_event.action = "Alt + W"
 	cancel_event.pressed = true
 	Input.parse_input_event(cancel_event)
@@ -299,9 +304,10 @@ func change_mode():
 
 func _input(event: InputEvent) -> void:
 	var selection = get_editor_interface().get_selection().get_selected_nodes()
+	var has_other_node = false
 	for i in selection:
 		if !i is EnvironmentSprite:
-			return
+			has_other_node = true
 	if viewport_type != "2D":
 		return
 	var camera = get_editor_interface().get_editor_viewport_2d().get_global_canvas_transform()
@@ -310,10 +316,10 @@ func _input(event: InputEvent) -> void:
 	var undo = get_editor_interface().get_editor_undo_redo()
 	var near = false
 	const distance = 500
-	var index
+	var index : int
 	
-	var viewport_position = -camera[2] / Vector2(camera[0].x,camera[1].y)
-	var is_mouse_in_viewport = Rect2(viewport_position, viewport.size / camera[1].y).has_point(mouse)
+	var viewport_position : Vector2 = -camera[2] / Vector2(camera[0].x,camera[1].y)
+	var is_mouse_in_viewport : bool = Rect2(viewport_position, viewport.size / camera[1].y).has_point(mouse)
 	
 	if event is InputEventMouseButton:
 		index = event.button_index
@@ -321,24 +327,25 @@ func _input(event: InputEvent) -> void:
 	var max : Vector2
 	var min : Vector2
 	for i in selection:
-		var pos = i.global_position
-		if !max:
-			max = pos
-		if !min:
-			min = pos
-		max.x = max(pos.x,max.x)
-		min.x = min(pos.x,min.x)
-		max.y = max(pos.y,max.y)
-		min.y = min(pos.y,min.y)
-	var rect = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
-	var rect_mouse = Rect2(mouse,Vector2(0,0))
+		if i is Node2D and i.global_position:
+			var pos : Vector2 = i.global_position
+			if !max:
+				max = pos
+			if !min:
+				min = pos
+			max.x = max(pos.x,max.x)
+			min.x = min(pos.x,min.x)
+			max.y = max(pos.y,max.y)
+			min.y = min(pos.y,min.y)
+	var rect : Rect2 = Rect2(min - Vector2(1,1) * dragging_distance,max - min + Vector2(1,1) * dragging_distance * 2)
+	var rect_mouse : Rect2 = Rect2(mouse,Vector2(0,0))
 	
 	for i in selection:
 		if rect.intersects(rect_mouse):
 			near = true
 	
-	var handled = false
-	if event is InputEventMouseButton:
+	var handled : bool = false
+	if event is InputEventMouseButton and !has_other_node:
 		if event.is_pressed() and !buttons_down.has(event.button_index):
 			buttons_down.append(event.button_index)
 		if !event.is_pressed() and buttons_down.has(event.button_index):
@@ -374,7 +381,7 @@ func _input(event: InputEvent) -> void:
 				dragging = false
 				
 	
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and !has_other_node:
 		if selection and !near:
 			handled = true
 		if selection:
@@ -391,36 +398,42 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !near and buttons_down.has(MOUSE_BUTTON_LEFT):
 		handled = false
 		
+	for i in selection:
+		if !i is EnvironmentSprite:
+			handled = false
+		
 	if handled:
 		get_viewport().set_input_as_handled()
 	
-	var node_index = 0
-	if dragging and is_mouse_in_viewport:
+	var node_index : int = 0
+	if dragging and is_mouse_in_viewport and !has_other_node:
 		for node in selection:
-			var last_position = undo_positions[node_index]
+			var last_position : Vector2 = undo_positions[node_index]
 			change_position("position changed" + str(undo_nr), node, "global_position", node.global_position + mouse - last_mouse_position, last_position)
 			node_index += 1
 			#i.global_position += mouse - last_mouse_position
 	for button in buttons:
-		var button_rect = Rect2(button.global_position ,button.size * button.scale)
-		if button_rect.has_point(mouse) and buttons_down.has(MOUSE_BUTTON_LEFT):
+		var button_rect : Rect2 = Rect2(button.global_position ,button.size * button.scale)
+		if button_rect.has_point(mouse) and event is InputEventMouseButton and index == MOUSE_BUTTON_LEFT:
+			print(true)
+			get_viewport().set_input_as_handled()
 			switch_scene(button_scenes[buttons.find(button)])
 	
 	
 	last_mouse_position = mouse
 	last_selection = selection
 		
-func set_viewport(type : String):
+func set_viewport(type : String) -> void:
 	viewport_type = type
 
-func change_position(undo_name : String, node : Node, property : String, last_value, new_value):
-	var undo_redo = get_editor_interface().get_editor_undo_redo()
+func change_position(undo_name : String, node : Node, property : String, last_value, new_value) -> void:
+	var undo_redo : EditorUndoRedoManager = get_editor_interface().get_editor_undo_redo()
 	undo_redo.create_action(undo_name, UndoRedo.MERGE_ALL)
 	undo_redo.add_do_property(node, property, last_value)
 	undo_redo.add_undo_property(node, property, new_value)
 	undo_redo.commit_action()
 	
-func create_exit_overlay():
+func create_exit_overlay() -> void:
 	for i in range(labels.size()):
 		labels.pop_at(0).queue_free()
 	
@@ -434,7 +447,7 @@ func create_exit_overlay():
 		return
 	for exit in scene.get_children():
 		if exit.is_in_group("exit"):
-			var label = Label.new()
+			var label : Label = Label.new()
 			labels.append(label)
 			label.text = str(exit.index) + " --> " + str(exit.room_entry_index)
 			viewport.add_child(label)
@@ -452,7 +465,7 @@ func create_exit_overlay():
 			exit_button.z_index = 100
 			
 
-func switch_scene(scene):
+func switch_scene(scene) -> void:
 	get_editor_interface().open_scene_from_path(scene)
 
 		

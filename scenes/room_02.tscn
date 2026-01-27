@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cb42qh1g3sbpu"]
+[gd_scene load_steps=15 format=3 uid="uid://cb42qh1g3sbpu"]
 
 [ext_resource type="Script" uid="uid://8gtxpiete45" path="res://scripts/room.gd" id="1_d5h8r"]
 [ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_qsnje"]
@@ -10,9 +10,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5h8r"]
 size = Vector2(310.25, 179)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqkxe"]
-size = Vector2(160.563, 399.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsnje"]
 size = Vector2(1460.06, 179)
 
@@ -20,28 +17,13 @@ size = Vector2(1460.06, 179)
 size = Vector2(282.03, 179)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmn6l"]
-size = Vector2(223, 243.5)
+size = Vector2(1293, 243.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2tnl"]
-size = Vector2(1116.5, 96.75)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjcek"]
-size = Vector2(1116.5, 96.75)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rygq"]
-size = Vector2(270.25, 525.688)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m35lo"]
-size = Vector2(742.125, 261.375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwddn"]
-size = Vector2(314.063, 710)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0dgm"]
-size = Vector2(1136, 133.25)
+size = Vector2(222.5, 979)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
-size = Vector2(222.5, 190)
+size = Vector2(222.5, 970)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2tnl"]
 atlas = ExtResource("5_b2tnl")
@@ -52,93 +34,40 @@ shader = ExtResource("4_qmn6l")
 
 [node name="scene" type="Node2D" groups=["room"]]
 script = ExtResource("1_d5h8r")
-margin_min = Vector2(0.265, -2.895)
-margin_max = Vector2(14.365, -0.885)
+margin_min = Vector2(-5.235, -9.035)
+margin_max = Vector2(15.985, 3.775)
 metadata/_custom_type_script = "uid://8gtxpiete45"
 metadata/_edit_lock_ = true
 
 [node name="slide_walls" type="StaticBody2D" parent="." groups=["collision", "slide_wall"]]
-visible = false
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slide_walls"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-903, 412)
 shape = SubResource("RectangleShape2D_d5h8r")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(-1128, 176)
-shape = SubResource("RectangleShape2D_rqkxe")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="slide_walls"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-55.0313, 574)
 shape = SubResource("RectangleShape2D_qsnje")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="slide_walls"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(804, 405)
 shape = SubResource("RectangleShape2D_rrl2k")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="slide_walls"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(1028.5, 219.75)
+position = Vector2(1563.5, 219.75)
 shape = SubResource("RectangleShape2D_qmn6l")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1574, 126)
-shape = SubResource("RectangleShape2D_b2tnl")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1581, -295)
-shape = SubResource("RectangleShape2D_gjcek")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1078, -527.156)
-shape = SubResource("RectangleShape2D_4rygq")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(-491, -772)
-shape = SubResource("RectangleShape2D_m35lo")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(-918, -328)
-shape = SubResource("RectangleShape2D_mwddn")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="slide_walls"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(418, -802)
-shape = SubResource("RectangleShape2D_x0dgm")
-metadata/_edit_lock_ = true
 
 [node name="collisions" type="StaticBody2D" parent="." groups=["collision"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
-metadata/_edit_lock_ = true
 
 [node name="damage" type="StaticBody2D" parent="." groups=["collision", "env_damage"]]
-visible = false
 modulate = Color(0.37, 0.643, 1, 1)
-metadata/_edit_lock_ = true
 
 [node name="exit_01" type="Area2D" parent="." groups=["collision", "exit"]]
-visible = false
 position = Vector2(-891, 322)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
@@ -147,17 +76,14 @@ angular_damp = 0.1
 script = ExtResource("2_qsnje")
 room_path = "res://scenes/room_01.tscn"
 room_entry_index = 1
-metadata/_edit_lock_ = true
 
 [node name="hitbox" type="CollisionShape2D" parent="exit_01"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -122)
-shape = SubResource("RectangleShape2D_dryon")
+position = Vector2(0, -516.5)
+shape = SubResource("RectangleShape2D_b2tnl")
 debug_color = Color(0.7, 0.326667, 0, 0)
-metadata/_edit_lock_ = true
 
 [node name="exit_02" type="Area2D" parent="." groups=["collision", "exit"]]
-visible = false
 position = Vector2(1972, 77)
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
@@ -167,33 +93,724 @@ script = ExtResource("2_qsnje")
 index = 1
 direction = 1
 room_path = "res://scenes/room_01.tscn"
-metadata/_edit_lock_ = true
 
 [node name="hitbox" type="CollisionShape2D" parent="exit_02"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -122)
+position = Vector2(0, -512)
 shape = SubResource("RectangleShape2D_dryon")
 debug_color = Color(0.7, 0.326667, 0, 0)
-metadata/_edit_lock_ = true
 
-[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-modulate = Color(0.25, 0.25, 0.25, 1)
-position = Vector2(16.3703, 74.1462)
-scale = Vector2(0.6, 0.6)
-script = ExtResource("3_rrl2k")
-size = 0.6
-layer = -3
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-metadata/_edit_lock_ = true
-
-[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+[node name="background_3" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(8.18515, 37.0731)
-scale = Vector2(0.8, 0.8)
 script = ExtResource("3_rrl2k")
 size = 0.8
 layer = -1
+z__index = -6
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite" type="Node2D" parent="background_3"]
+position = Vector2(150.9, 428.479)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite2" type="Node2D" parent="background_3"]
+position = Vector2(-101.414, 444.585)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite3" type="Node2D" parent="background_3"]
+position = Vector2(-382.358, 412.374)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite4" type="Node2D" parent="background_3"]
+position = Vector2(-665.092, 455.321)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite5" type="Node2D" parent="background_3"]
+position = Vector2(-260.673, 457.109)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite6" type="Node2D" parent="background_3"]
+position = Vector2(469.533, 420.098)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite12" type="Node2D" parent="background_3"]
+position = Vector2(-721.347, 331.975)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="background_3"]
+position = Vector2(-768.982, 389.135)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="background_3"]
+position = Vector2(-995.25, 303.394)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite7" type="Node2D" parent="background_3"]
+position = Vector2(769.632, 362.937)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite8" type="Node2D" parent="background_3"]
+position = Vector2(879.194, 274.813)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite15" type="Node2D" parent="background_3"]
+position = Vector2(1100.84, 31.9463)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite25" type="Node2D" parent="background_3"]
+position = Vector2(1345.84, 58.8272)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite17" type="Node2D" parent="background_3"]
+position = Vector2(1571.28, -32.4576)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite20" type="Node2D" parent="background_3"]
+position = Vector2(1447.68, -1.70774)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite21" type="Node2D" parent="background_3"]
+position = Vector2(1020.1, 3.11526)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite22" type="Node2D" parent="background_3"]
+position = Vector2(1128.28, -8.13855)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite16" type="Node2D" parent="background_3"]
+position = Vector2(1322.5, 22.5149)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite26" type="Node2D" parent="background_3"]
+position = Vector2(1409.74, 69.6742)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite23" type="Node2D" parent="background_3"]
+position = Vector2(1009.48, 29.7601)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite24" type="Node2D" parent="background_3"]
+position = Vector2(958.927, 69.0303)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite18" type="Node2D" parent="background_3"]
+position = Vector2(1789.37, 3.65115)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite19" type="Node2D" parent="background_3"]
+position = Vector2(1996.86, 10.725)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite9" type="Node2D" parent="background_3"]
+position = Vector2(812.505, 377.227)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite10" type="Node2D" parent="background_3"]
+position = Vector2(531.46, 451.061)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite11" type="Node2D" parent="background_3"]
+position = Vector2(531.46, 451.061)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+modulate = Color(0.5, 0.5, 0.5, 1)
+script = ExtResource("3_rrl2k")
+size = 0.9
+layer = -1
+z__index = -1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite" type="Node2D" parent="background_2"]
+position = Vector2(160.882, 496.698)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite2" type="Node2D" parent="background_2"]
+position = Vector2(-91.4314, 512.803)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite3" type="Node2D" parent="background_2"]
+position = Vector2(-372.376, 480.593)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite4" type="Node2D" parent="background_2"]
+position = Vector2(-655.11, 523.54)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite5" type="Node2D" parent="background_2"]
+position = Vector2(-250.693, 525.328)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite6" type="Node2D" parent="background_2"]
+position = Vector2(479.518, 488.317)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite12" type="Node2D" parent="background_2"]
+position = Vector2(-711.366, 400.192)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="background_2"]
+position = Vector2(-759.001, 457.354)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="background_2"]
+position = Vector2(-985.269, 371.61)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite7" type="Node2D" parent="background_2"]
+position = Vector2(779.62, 431.155)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite8" type="Node2D" parent="background_2"]
+position = Vector2(889.181, 343.029)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite15" type="Node2D" parent="background_2"]
+position = Vector2(1110.83, 100.16)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite25" type="Node2D" parent="background_2"]
+position = Vector2(1355.82, 127.041)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite17" type="Node2D" parent="background_2"]
+position = Vector2(1581.26, 35.7562)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite20" type="Node2D" parent="background_2"]
+position = Vector2(1457.66, 66.506)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite21" type="Node2D" parent="background_2"]
+position = Vector2(1030.08, 71.329)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite22" type="Node2D" parent="background_2"]
+position = Vector2(1138.27, 60.0752)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite16" type="Node2D" parent="background_2"]
+position = Vector2(1332.48, 90.7286)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite26" type="Node2D" parent="background_2"]
+position = Vector2(1419.72, 137.888)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite23" type="Node2D" parent="background_2"]
+position = Vector2(1019.47, 97.9738)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite24" type="Node2D" parent="background_2"]
+position = Vector2(968.923, 137.244)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite18" type="Node2D" parent="background_2"]
+position = Vector2(1799.35, 71.8649)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite19" type="Node2D" parent="background_2"]
+position = Vector2(2006.85, 78.9387)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite9" type="Node2D" parent="background_2"]
+position = Vector2(822.492, 445.445)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite10" type="Node2D" parent="background_2"]
+position = Vector2(541.444, 519.28)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite11" type="Node2D" parent="background_2"]
+position = Vector2(541.444, 519.28)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
+script = ExtResource("3_rrl2k")
+size = 0.95
+z__index = -1
+metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite" type="Node2D" parent="background_1"]
+position = Vector2(110.553, 540.137)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite2" type="Node2D" parent="background_1"]
+position = Vector2(-75.7245, 551.927)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite3" type="Node2D" parent="background_1"]
+position = Vector2(-370.469, 542.495)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite4" type="Node2D" parent="background_1"]
+position = Vector2(-702.94, 511.841)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite5" type="Node2D" parent="background_1"]
+position = Vector2(-804.332, 471.756)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite6" type="Node2D" parent="background_1"]
+position = Vector2(-761.889, 514.199)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite7" type="Node2D" parent="background_1"]
+position = Vector2(-688.792, 547.211)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite8" type="Node2D" parent="background_1"]
+position = Vector2(-329.86, 573.41)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite9" type="Node2D" parent="background_1"]
+position = Vector2(309.407, 565.551)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite10" type="Node2D" parent="background_1"]
+position = Vector2(492.803, 531.491)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite11" type="Node2D" parent="background_1"]
+position = Vector2(741.698, 494.812)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="background_1"]
+position = Vector2(880.817, 360.409)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite15" type="Node2D" parent="background_1"]
+position = Vector2(982.485, 56.5253)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite16" type="Node2D" parent="background_1"]
+position = Vector2(1447.46, 83.9427)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite17" type="Node2D" parent="background_1"]
+position = Vector2(1696.67, 124.614)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite18" type="Node2D" parent="background_1"]
+position = Vector2(1991.41, 115.182)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite19" type="Node2D" parent="background_1"]
+position = Vector2(1996.13, 136.404)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite20" type="Node2D" parent="background_1"]
+position = Vector2(1656.58, 143.478)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite21" type="Node2D" parent="background_1"]
+position = Vector2(1340.62, 159.983)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite22" type="Node2D" parent="background_1"]
+position = Vector2(1081.4, 126.71)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite12" type="Node2D" parent="background_1"]
+position = Vector2(712.878, 526.251)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="background_1"]
+position = Vector2(487.563, 565.551)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.737193, 0.737193, 0.737193, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
@@ -300,9 +917,34 @@ size = Vector2(0.5, 0.5)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
+[node name="EnvironmentSprite12" type="Node2D" parent="mainlayer"]
+position = Vector2(1418.38, 169.9)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="mainlayer"]
+position = Vector2(1772.07, 163.469)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="mainlayer"]
+position = Vector2(2016.44, 161.326)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
 [node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-1.63703, -7.41461)
-scale = Vector2(1.04, 1.04)
 script = ExtResource("3_rrl2k")
 size = 1.04
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
@@ -389,7 +1031,67 @@ metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="EnvironmentSprite9" type="Node2D" parent="forground_1"]
-position = Vector2(1172.23, 248.408)
+position = Vector2(1103.76, 225.583)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite12" type="Node2D" parent="forground_1"]
+position = Vector2(1409.55, 195.934)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="forground_1"]
+position = Vector2(1414.99, 237.95)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="forground_1"]
+position = Vector2(1733.15, 191.812)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite15" type="Node2D" parent="forground_1"]
+position = Vector2(1738.59, 233.827)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite16" type="Node2D" parent="forground_1"]
+position = Vector2(2025.83, 181.506)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.724643, 0.724643, 0.724642, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite17" type="Node2D" parent="forground_1"]
+position = Vector2(1860.2, 223.521)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
@@ -419,8 +1121,6 @@ metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-3.27406, -14.8292)
-scale = Vector2(1.08, 1.08)
 script = ExtResource("3_rrl2k")
 size = 1.08
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
@@ -432,7 +1132,7 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -442,7 +1142,7 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -452,17 +1152,17 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="EnvironmentSprite6" type="Node2D" parent="forground_2"]
-position = Vector2(560.206, 587.026)
+position = Vector2(548.813, 602.216)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -472,7 +1172,7 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -482,7 +1182,7 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -492,27 +1192,107 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="EnvironmentSprite11" type="Node2D" parent="forground_2"]
-position = Vector2(843.859, 426.219)
+position = Vector2(858.125, 429.072)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="EnvironmentSprite12" type="Node2D" parent="forground_2"]
-position = Vector2(1171.35, 297.405)
+position = Vector2(1108.58, 271.727)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite13" type="Node2D" parent="forground_2"]
+position = Vector2(1332.86, 234.016)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite14" type="Node2D" parent="forground_2"]
+position = Vector2(1653.63, 236.713)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite17" type="Node2D" parent="forground_2"]
+position = Vector2(1520.3, 278.688)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite15" type="Node2D" parent="forground_2"]
+position = Vector2(2026.47, 234.196)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite16" type="Node2D" parent="forground_2"]
+position = Vector2(2091.06, 265.772)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite18" type="Node2D" parent="forground_2"]
+position = Vector2(1746.43, 278.403)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite19" type="Node2D" parent="forground_2"]
+position = Vector2(1236.14, 288.622)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
+metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
+metadata/_edit_lock_ = true
+
+[node name="EnvironmentSprite20" type="Node2D" parent="forground_2"]
+position = Vector2(1104.08, 336.143)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_rrl2k")
+texture = SubResource("AtlasTexture_b2tnl")
+size = Vector2(0.5, 0.5)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
@@ -522,24 +1302,21 @@ scale = Vector2(0.8, 0.8)
 script = ExtResource("4_rrl2k")
 texture = SubResource("AtlasTexture_b2tnl")
 size = Vector2(0.5, 0.5)
-color = Color(0.597176, 0.597176, 0.597176, 1)
+color = Color(0.389287, 0.389287, 0.389287, 1)
 metadata/_custom_type_script = "uid://ckrtlfxhcy84x"
 metadata/_edit_lock_ = true
 
 [node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-4.09258, -18.5365)
-scale = Vector2(1.1, 1.1)
 script = ExtResource("3_rrl2k")
 size = 1.1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="black_shade"]
+visible = false
 material = SubResource("ShaderMaterial_a1hoc")
 offset_left = -438.768
 offset_top = -308.252
 offset_right = 17.2317
 offset_bottom = 142.748
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-clip_children = 1
-color = Color(0.80704, 0.7663, 0.97, 1)
+metadata/_edit_lock_ = true

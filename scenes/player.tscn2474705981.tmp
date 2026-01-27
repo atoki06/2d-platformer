@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://ckdph4m8kqkvj"]
+
+[ext_resource type="Script" uid="uid://cjspdfkruglb4" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://c51p5hy0ljdcf" path="res://scripts/debug.gd" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://c60jghy542xf" path="res://2d_assets/20251120.frieren_spritesheet.png" id="2_smehm"]
+[ext_resource type="Texture2D" uid="uid://btuyewgf6rwki" path="res://2d_assets/environment/ruins/2d_light.webp" id="2_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bj1i5rdcefptt" path="res://music/cathedral.wav" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://duq5ujivcrpfi" path="res://scripts/debug_text.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://ddaneqf8dvrqr" path="res://scripts/global.gd" id="5_qlg0r"]
+[ext_resource type="Shader" uid="uid://cj8x7m2ygahik" path="res://shader/black_fog_player.gdshader" id="7_fjrip"]
+
+[sub_resource type="Gradient" id="Gradient_sh265"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4flbx"]
+gradient = SubResource("Gradient_sh265")
+width = 100
+height = 200
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+resource_local_to_scene = true
+size = Vector2(100, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(150, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(615.385, 615.385)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smehm"]
+shader = ExtResource("7_fjrip")
+shader_parameter/size = 0.37
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_qhqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-4.76837e-07, -100)
+scale = Vector2(0.375, 0.4)
+texture = ExtResource("2_smehm")
+hframes = 3
+vframes = 3
+
+[node name="Sprite3D" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+texture = SubResource("GradientTexture2D_4flbx")
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_tuyoq")
+
+[node name="light" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, -100)
+texture = ExtResource("2_tuyoq")
+texture_scale = 10.0
+
+[node name="attack" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -100)
+
+[node name="Sprite3D2" type="Sprite2D" parent="attack"]
+position = Vector2(-65, 8.34465e-07)
+scale = Vector2(1.5, 0.45)
+texture = SubResource("GradientTexture2D_4flbx")
+
+[node name="hitbox" type="CollisionShape2D" parent="attack"]
+position = Vector2(-65, 0)
+shape = SubResource("RectangleShape2D_qlg0r")
+
+[node name="soundtrack_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qlg0r")
+volume_db = -26.0
+
+[node name="debug" type="Node" parent="."]
+script = ExtResource("2_dqkch")
+
+[node name="debug_text" type="Label" parent="debug"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_dqkch")
+
+[node name="global" type="Node" parent="."]
+script = ExtResource("5_qlg0r")
+
+[node name="detection" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -101)
+
+[node name="hitbox" type="CollisionShape2D" parent="detection"]
+scale = Vector2(1.3, 1.3)
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="black_fog" type="ColorRect" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_smehm")
+offset_left = -3000.0
+offset_top = -2000.0
+offset_right = 3000.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 1)
+
+[node name="camera" type="Camera2D" parent="."]
+visible = false
+top_level = true
+z_index = 10
+position = Vector2(0, -98)
+zoom = Vector2(0.6, 0.6)
+
+[node name="black_screen" type="ColorRect" parent="camera"]
+visible = false
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2464.0
+offset_top = -1387.0
+offset_right = 2464.0
+offset_bottom = 1389.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="soundplayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="area_entered" from="attack" to="." method="_on_area_3d_area_entered"]

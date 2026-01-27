@@ -1,5 +1,6 @@
 extends room_exit
-@export var disabled = false
+class_name DefaultExit
+@export var disabled : bool = false
 
 func _ready() -> void:
 	set_player_position()

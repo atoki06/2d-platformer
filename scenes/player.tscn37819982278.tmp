@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://ckdph4m8kqkvj"]
+
+[ext_resource type="Script" uid="uid://cjspdfkruglb4" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://t15mmlbb5tox" path="res://physics_component.tscn" id="2_fjrip"]
+[ext_resource type="AudioStream" uid="uid://bj1i5rdcefptt" path="res://music/cathedral.wav" id="3_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://coexwsw425s25" path="res://movement_component.tscn" id="3_smehm"]
+[ext_resource type="PackedScene" uid="uid://cgthnfswlatm4" path="res://animation_component.tscn" id="4_smehm"]
+[ext_resource type="Shader" uid="uid://dtvhdsgxhj05f" path="res://scenes/color_channel.gdshader" id="5_fjrip"]
+[ext_resource type="PackedScene" uid="uid://buk4clu08sdyd" path="res://scenes/PauseMenu.tscn" id="5_qlg0r"]
+[ext_resource type="Shader" uid="uid://cj8x7m2ygahik" path="res://shader/black_fog_player.gdshader" id="7_fjrip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+resource_local_to_scene = true
+size = Vector2(100, 330)
+
+[sub_resource type="Gradient" id="Gradient_sh265"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4flbx"]
+gradient = SubResource("Gradient_sh265")
+width = 100
+height = 200
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(150, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(615.385, 615.385)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smehm"]
+shader = ExtResource("7_fjrip")
+shader_parameter/size = 0.37
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ur7pv"]
+shader = ExtResource("5_fjrip")
+shader_parameter/size_red = Vector2(1, 1)
+shader_parameter/offset_red = Vector2(0, 0)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_qhqgy")
+
+[node name="PhysicsComp" parent="." instance=ExtResource("2_fjrip")]
+
+[node name="MovementComp" parent="." node_paths=PackedStringArray("physics_component") instance=ExtResource("3_smehm")]
+physics_component = NodePath("../PhysicsComp")
+
+[node name="AnimationComp" parent="." instance=ExtResource("4_smehm")]
+position = Vector2(-1.66667, -99.6666)
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_tuyoq")
+
+[node name="attack" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -100)
+
+[node name="Sprite3D2" type="Sprite2D" parent="attack"]
+position = Vector2(-65, 8.34465e-07)
+scale = Vector2(1.5, 0.45)
+texture = SubResource("GradientTexture2D_4flbx")
+
+[node name="hitbox" type="CollisionShape2D" parent="attack"]
+position = Vector2(-65, 0)
+shape = SubResource("RectangleShape2D_qlg0r")
+
+[node name="detection" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -101)
+
+[node name="hitbox" type="CollisionShape2D" parent="detection"]
+scale = Vector2(1.3, 1.3)
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+visible = false
+
+[node name="black_fog" type="ColorRect" parent="CanvasGroup"]
+z_index = 10
+material = SubResource("ShaderMaterial_smehm")
+offset_left = -3000.0
+offset_top = -2000.0
+offset_right = 3000.0
+offset_bottom = 2000.0
+color = Color(0, 0, 0, 1)
+
+[node name="camera" type="Camera2D" parent="."]
+top_level = true
+z_index = 10
+position = Vector2(0, -98)
+zoom = Vector2(0.6, 0.6)
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="camera"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="camera/CanvasGroup2"]
+material = SubResource("ShaderMaterial_ur7pv")
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+scale = Vector2(1.667, 1.667)
+pivot_offset = Vector2(960, 540)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="camera"]
+
+[node name="black_screen" type="ColorRect" parent="camera/CanvasGroup"]
+visible = false
+z_index = 2
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+scale = Vector2(1.667, 1.667)
+pivot_offset = Vector2(960, 540)
+color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" parent="camera" instance=ExtResource("5_qlg0r")]
+process_mode = 3
+visible = false
+z_index = 4
+scale = Vector2(1.667, 1.667)
+
+[node name="soundtrack_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qlg0r")
+volume_db = -26.0
+
+[node name="soundplayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="area_entered" from="attack" to="." method="_on_area_3d_area_entered"]

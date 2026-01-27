@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn50scb21utk0"]
+[gd_scene load_steps=6 format=3 uid="uid://cn50scb21utk0"]
 
 [ext_resource type="Script" uid="uid://b553kcrdkhtxx" path="res://scripts/room_branch.gd" id="1_hicpf"]
+[ext_resource type="PackedScene" uid="uid://3cbug840ysjs" path="res://shader.tscn" id="2_8jlqx"]
 [ext_resource type="PackedScene" uid="uid://ckdph4m8kqkvj" path="res://scenes/player.tscn" id="2_conc5"]
+[ext_resource type="PackedScene" uid="uid://cwm31ub16n3ye" path="res://game_ui.tscn" id="3_gaj8i"]
+[ext_resource type="PackedScene" uid="uid://b8sleng5ejce3" path="res://menus.tscn" id="3_wpup5"]
 
-[node name="Node2D" type="Node2D"]
+[node name="branch" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_hicpf")
 
+[node name="Shader" parent="." instance=ExtResource("2_8jlqx")]
+
+[node name="GameUI" parent="." instance=ExtResource("3_gaj8i")]
+
+[node name="Menus" parent="." instance=ExtResource("3_wpup5")]
+
 [node name="Player" parent="." instance=ExtResource("2_conc5")]
+
+[node name="scene" type="Node2D" parent="."]

@@ -1,56 +1,66 @@
 extends CharacterBody2D
 
-#const
-const line_thickness = 2
+#composition
+@onready var physics_component : PhysicsComponent = $PhysicsComp
+@onready var movement_component : MovementComponent = $MovementComp
 
 #node connections
-@onready var soundtrack_player = $soundtrack_player
-@onready var black_screen : Node = $camera/black_screen
-@onready var camera = $camera
-@onready var attack_body = $attack
-@onready var attack_hitbox = $attack/hitbox
-@onready var hitbox = $hitbox
-@onready var detection = $detection
-@onready var black_fog = $black_fog
-@onready var sound_player = $soundplayer
+@onready var soundtrack_player : Node = $soundtrack_player
+@onready var attack_hitbox : Node = $attack/hitbox
+@onready var sound_player : Node = $soundplayer
+@onready var detection : Node = $detection
+@onready var attack_body : Node = $attack
+@onready var camera : Node = $camera
+@onready var hitbox : Node = $hitbox
+@onready var animation : AnimationComponent = $AnimationComp
 
-#@exports
-@export var camera_position : Vector2
-@export var walking_speed = 800;
-@export var jump_height = -450
-@export var jump_time = 0.4
-@export var jump_down_multiplier = 0.8
-@export var dubble_jump_height = -350
-@export var dubble_jump_time = 0.3
-@export var wall_slide_speed = -700
-@export var wall_jump_height = -350
-@export var wall_jump_time = 0.3
+#const
+const camera_position : Vector2 = Vector2(0,0)
+const line_thickness : float = 2.0
+const dubble_jump_time : float = 0.3
+const wall_jump_time : float = 0.3
+const jump_time : float = 0.4
+const jump_down_multiplier : float = 1.8
+
+const jump_height : int = -450
+const dubble_jump_height : int = -350
+const wall_jump_height : int = -350
+const walking_speed : int = 800
+const wall_slide_speed : int = -700
 
 #variables
-var gravity = Vector2(0,12)
-var dubble_jump_used = false
-var environment_velocity = Vector2(0,0)
-var wall_jump_timer = 0.0
-var wall_jump_direction = 0.0
-var move_lock = 0.0
-var quick_spawn = Vector2(0,0)
-var is_black_screen = false
-var attack_timer = 0.2
-var attack_cooldown = 0.3
-var looking_direction = 0.0
-var is_pogoing = false
-var camera_target = Vector2(0,0)
-var is_camera_limited = false
-var camera_speed = 8
-var camera_speed_target = 8
-var new_room = false
-var collision_debug = false
+var is_camera_limited : bool = false
+var dubble_jump_used : bool = false
+var last_is_on_floor : bool = false
+var is_black_screen : bool = false
+var collision_debug : bool = false
+var is_pogoing : bool = false
+var new_room : bool = false
 
-var room
-var drawer
+var wall_jump_direction : float = 0.0
+var camera_speed_target : float = 8.0
+var looking_direction : float = 0.0
+var wall_jump_timer : float = 0.0
+var attack_cooldown : float = 0.3
+var attack_timer : float = 0.2
+var camera_speed : float = 8.0
+var move_lock : float = 0.0
+
+var environment_velocity : Vector2 = Vector2(0,0)
+var camera_target : Vector2 = Vector2(0,0)
+var quick_spawn : Vector2 = Vector2(0,0)
+var gravity : Vector2 = Vector2(0,12)
+var velo : Vector2 = Vector2(0,0)
+
+var drawer : Node
+var room : Node
+
+#signals
+signal landing
 
 #input
-var input = {
+var input : Dictionary = {
+	"esc" : KEY_ESCAPE,
 	"up" : KEY_W,
 	"left" : KEY_A,
 	"down" : KEY_S,
@@ -60,30 +70,33 @@ var input = {
 	"attack" : MOUSE_BUTTON_LEFT,
 	"collision_debug" : KEY_N
 }
-var velo = Vector2(0,0)
 
 #debug
-var debug_open = false
+var debug_open : bool = false
 
 func _ready() -> void:
+	#animation.start_animation(0,8,true)
+	
+	#connect signals
+	landing.connect(_landing)
+	
 	drawer = Node2D.new()
 	drawer.top_level = true
 	drawer.z_index = 20
 	drawer.draw.connect(draw)
 	add_child(drawer)
-	var sound = load("res://sounds/Shoot_combined.wav")
+	var sound : AudioStream = load("res://sounds/Shoot_combined.wav")
 	sound_player.stream = sound
 	soundtrack_player.playing = false
 	camera.visible = !Engine.is_editor_hint()
-	black_screen.visible = !Engine.is_editor_hint()
 	visible = true
-	for action in InputMap.get_actions():
+	for action : StringName in InputMap.get_actions():
 		InputMap.erase_action(action)
+	
 		
-	for action in input:
-		var action_key = input[action]
-		print(action)
-		var event
+	for action : StringName in input:
+		var action_key : int = input[action]
+		var event : InputEvent
 		if action_key < 30:
 			event = InputEventMouseButton.new()
 			event.button_index = action_key
@@ -98,76 +111,28 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("collision_debug"):
 		collision_debug = !collision_debug
 	drawer.queue_redraw()
-	var mouse_pos
 	if Input.is_action_just_pressed("debug"):
 		toggle_debug_mode()
 	
-	const exit_size = 500.0
-	var near_exit = exit_size
-	for area in detection.get_overlapping_areas():
-		if area.is_in_group("exit") and area.global_position.distance_to(global_position) < near_exit:
-			near_exit = area.global_position.distance_to(global_position)
-	var fog = black_fog.material
+	if Input.is_action_just_pressed("esc"):
+		Global.emit_signal("pause")
+	
 	#fog.set("shader_parameter/size",0.37 * clamp(near_exit / (exit_size * 4) + 0.75,0.5,1.0))
 
 func _physics_process(delta: float) -> void:
-	black_screen.color.a += (int(is_black_screen) - black_screen.color.a) * delta * 10.0
+	Global.emit_signal("black_screen", float(is_black_screen))
+	
 	attack_timer = max(attack_timer - delta, 0.0)
 	attack_cooldown = max(attack_cooldown - delta, 0.0)
 	move_lock = max(move_lock - delta, 0.0)
 	wall_jump_timer = max(wall_jump_timer - delta, 0.0)
+	
 	if !attack_timer:
 		attack_body.visible = false
 		attack_body.monitoring = false
 		attack_hitbox.disabled = true
 	
-	#walking
-	velo.x += ((int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))) * walking_speed - velo.x) * 0.9
-	#velo.x *= walking_speed
-	
-	var direction = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
-	if direction:
-		looking_direction = direction
-	
-	#define gravity
-	if velo.y < 0:
-		gravity = Vector2(0,-2 * jump_height / jump_time / jump_time)
-		if dubble_jump_used:
-			gravity = Vector2(0,-2 * dubble_jump_height / dubble_jump_time / dubble_jump_time)
-	else:
-		gravity = Vector2(0,-2 * jump_height / jump_time / jump_time * jump_down_multiplier)
-	
-	#cancel jump
-	if not Input.is_action_pressed("jump") and velo.y < 0 and !is_pogoing:
-		gravity = Vector2(0,-2 * jump_height / jump_time / jump_time) * 5
-	if velo.y > 0:
-		is_pogoing = false
-	
-	#jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velo.y = 2 * jump_height / jump_time + environment_velocity.y
-		is_pogoing = false
-	elif Input.is_action_just_pressed("jump"):
-		dubble_jump()
-	
-	#applying gravity
-	velo += gravity * delta
-	if is_on_floor():
-		velo.y = min(velo.y, environment_velocity.y)
-		dubble_jump_used = false
-		quick_spawn = Vector2(global_position.x,global_position.y)
-	if is_on_ceiling():
-		velo.y = max(velo.y, environment_velocity.y)
-	if is_on_wall() and !is_on_floor():
-		var slide_wall = false
-		for i in range(get_slide_collision_count()):
-			var collision = get_slide_collision(i)
-			if collision.get_collider().is_in_group("slide_wall"):
-				slide_wall = true
-		if !slide_wall:
-			stick_to_wall()
-			dubble_jump_used = false
-	
+
 	if wall_jump_timer:
 		velo.x = wall_jump_direction
 		
@@ -175,57 +140,45 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and !attack_cooldown:
 		attack()
 	
-	#final
-	velo.y = min(velo.y,4500)
-	if move_lock:
-		velo = Vector2(0,0)
-	velocity = Vector2(velo.x,velo.y)
-	move_and_slide()
+	physics_component.paused = move_lock
+	
+	if Input.is_action_just_pressed("jump"):
+		movement_component.set_max_air_jumps(1)
+		movement_component.trigger_jump()
+	
+	movement_component.cancel_jump()
+	var right : bool = Input.is_action_pressed("right")
+	var left : bool = Input.is_action_pressed("left")
+	
+	var direction : float = int(right) - int(left)
+	movement_component.walk(direction)
+	
+	if direction:
+		looking_direction = direction
+	
+	Global.emit_signal("player_pos",global_position)
+	Global.emit_signal("camera_pos",camera.global_position)
 	#global_position.z = 0
 	
 	#move camera
-	room = get_parent().get_child(1)
-	var cam_pos_x = clamp(global_position.x,room.margin_min.x * 100,room.margin_max.x * 100)
-	var cam_pos_y = clamp(global_position.y,room.margin_min.y * 100,room.margin_max.y * 100)
-	var camera_direction = (Vector2(cam_pos_x,cam_pos_y) + camera_position - camera.global_position)
+	room = Global.current_scene
+	var cam_pos_x : float = clamp(global_position.x,room.margin_min.x * 100,room.margin_max.x * 100)
+	var cam_pos_y : float = clamp(global_position.y,room.margin_min.y * 100,room.margin_max.y * 100)
+	var camera_direction : Vector2 = (Vector2(cam_pos_x,cam_pos_y) + camera_position - camera.global_position)
 	camera.global_position += camera_direction * delta * camera_speed
 	camera.global_position = Vector2(snapped(camera.global_position.x,1),snapped(camera.global_position.y,1))
-	#if new_room:
-	#	new_room = false
-	#	camera.global_position = Vector2(cam_pos_x,cam_pos_y) + camera_position
+
+	if is_on_floor() and !last_is_on_floor:
+		emit_signal("landing")
 	
-	#parallax
-	for i in room.get_children():
-		if i.is_in_group("parallax"):
-			i.global_position = camera.global_position - camera.global_position * i.size
-			i.scale = Vector2(1,1) * i.size
+	#saving for next frame:
+	last_is_on_floor = is_on_floor()
+
+#func int_key_pressed(key):
+#	return int(Input.is_key_label_pressed(key))
+
 	
-	Global.player_position = global_position
-	
-	
-func int_key_pressed(key):
-	return int(Input.is_key_label_pressed(key))
-	
-	
-func dubble_jump():
-	if !dubble_jump_used:
-		velo.y = 2 * dubble_jump_height / dubble_jump_time
-		dubble_jump_used = true
-		is_pogoing = false
-	
-func stick_to_wall():
-	velo.y = min(velo.y, -wall_slide_speed)
-	if Input.is_action_just_pressed("jump"):
-		wall_jump()
-	
-func wall_jump():
-	var normal = get_wall_normal()
-	velo.y = 2 * wall_jump_height / wall_jump_time
-	wall_jump_direction = normal.x * walking_speed * 3.0
-	wall_jump_timer = 0.07
-	is_pogoing = false
-	
-func instant_respawn(falling : bool = false):
+func instant_respawn(falling : bool = false) -> void:
 	is_black_screen = true
 	if !falling:
 		move_lock = 0.6
@@ -239,22 +192,22 @@ func instant_respawn(falling : bool = false):
 		camera.global_position = camera_target + camera_position
 	is_black_screen = false
 	
-func toggle_debug_mode():
+func toggle_debug_mode() -> void:
 	debug_open = !debug_open
-	for child in get_all_children(get_tree().get_root()):
+	for child : Node in get_all_children(get_tree().get_root()):
 		if child is CollisionPolygon3D or child is CollisionShape3D:
 			child.debug_color.a = 0.4 * int(debug_open)
 			child.debug_fill = false
-			print(child.debug_color.a)
 		
 	
-func get_all_children(in_node,arr:=[]):
+func get_all_children(in_node : Node ,arr : Array = []) -> Array:
 	arr.push_back(in_node)
-	for child in in_node.get_children():
+	for child : Node in in_node.get_children():
 		arr = get_all_children(child,arr)
 	return arr
 	
-func attack():
+
+func attack() -> void:
 	#sound_player.play(0.0)
 	attack_body.rotation_degrees = 90 + 90 * looking_direction * (int(!is_on_wall()) - 0.5) * 2.0
 	if Input.is_action_pressed("down") and !is_on_floor():
@@ -266,21 +219,19 @@ func attack():
 	attack_hitbox.disabled = false
 	attack_timer = 0.2
 	attack_cooldown = 0.3
-		
-
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	if area.is_in_group("spikes") and Input.is_action_pressed("down") and !is_on_floor():
 		velo.y = 1.5 * jump_height / jump_time + environment_velocity.y
 		is_pogoing = true
 		dubble_jump_used = false
-		
+
 func draw() -> void:
 	if !collision_debug:
 		return
-	for node in room.get_children():
+	for node : Node in room.get_children():
 		if node.is_in_group("collision"):
-			var color
+			var color : Color
 			if node.is_in_group("slide_wall"):
 				color = Color(0.21568628, 1.0, 0.0)
 			elif node.is_in_group("exit"):
@@ -289,14 +240,12 @@ func draw() -> void:
 				color = Color(1.0, 0.0, 0.0)
 			else:
 				color = Color(0.0, 0.4, 1.0)
-			
 			color.a = 0.7
 			
-			
-			for collision in node.get_children():
+			for collision : Node in node.get_children():
 				if collision is CollisionShape2D and collision.shape:
-					var pos = collision.global_position
-					var radius = collision.shape.size / 2.0
+					var pos : Vector2 = collision.global_position
+					var radius : Vector2 = collision.shape.size / 2.0
 					
 					drawer.draw_line(pos - radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
 					drawer.draw_line(pos + radius, pos + radius * Vector2(1,-1), color, line_thickness, true)
@@ -304,9 +253,23 @@ func draw() -> void:
 					drawer.draw_line(pos + radius * Vector2(-1,1), pos - radius, color, line_thickness, true)
 				
 				if collision is CollisionPolygon2D and collision.polygon.size() > 2:
-					var pos = collision.global_position
-					var polygon = collision.polygon
-					for point in polygon.size():
+					var pos : Vector2 = collision.global_position
+					var polygon : PackedVector2Array = collision.polygon
+					for point : int in polygon.size():
 						polygon[point] += pos
 					drawer.draw_polyline(polygon, color, line_thickness, true)
 					drawer.draw_line(polygon[0], polygon[polygon.size() - 1], color, line_thickness, true)
+
+func _landing() -> void:
+	var fps : int = 10
+	var time : float = 0.2
+	var strength : float = 0.0
+	var timer : SceneTreeTimer = get_tree().create_timer(time)
+	for i : int in range(fps):
+		if timer.time_left:
+			await get_tree().create_timer(time/fps).timeout
+			_camera_shake(strength * (timer.time_left / time))
+	_camera_shake(0)
+	
+func _camera_shake(_range : float) -> void:
+	camera.offset = Vector2(randf_range(-_range,_range),randf_range(-_range,_range))

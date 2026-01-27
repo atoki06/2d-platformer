@@ -8,7 +8,7 @@ void vertex() {
 
 void fragment() {
 	vec2 new_uv = (UV - vec2(0.5,0.5));
-	float dist = pow(pow(new_uv.x,2.0) + pow(new_uv.y,2.0),0.3) / size - 0.5;
+	float dist = pow(pow(new_uv.x,2.0) + pow(new_uv.y,2.0),0.3) / 0.4 - 0.5;
 	COLOR.a = dist;
 }
 

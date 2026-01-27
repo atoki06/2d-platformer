@@ -1,17 +1,19 @@
 extends Node2D
 
-@export var first_room = "res://scenes/room_01.tscn"
+@export var first_room : String = "res://scenes/room_01.tscn"
+@onready var scene : Node = $scene
 
 func _ready() -> void:
-	for i in get_children():
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+	Global.branch = self
+	Global.changescene.connect(change_room)
+	change_room(first_room)
+	
+func change_room(new_room : String) -> void:
+	for i : Node in scene.get_children():
 		if !i.is_in_group("player"):
-			remove_child(i)
+			scene.remove_child(i)
 			i.free()
-	add_child(load(first_room).instantiate())
-
-func change_room(new_room):
-	for i in get_children():
-		if !i.is_in_group("player"):
-			remove_child(i)
-			i.free()
-	add_child(load(new_room).instantiate())
+	var room : Node = load(new_room).instantiate()
+	Global.current_scene = room
+	scene.add_child(room)

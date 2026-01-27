@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://3cbug840ysjs"]
+
+[ext_resource type="Shader" uid="uid://covs6ge23bo2i" path="res://scenes/distortion.gdshader" id="1_qwwtv"]
+[ext_resource type="Script" uid="uid://ceuxae065fpo0" path="res://scenes/shader.gd" id="2_xvsy8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fulsm"]
+shader = ExtResource("1_qwwtv")
+shader_parameter/scale = 0.0
+shader_parameter/distortion = 1.2
+shader_parameter/player_pos = Vector2(0, 0)
+shader_parameter/black_screen_strength = 0.0
+shader_parameter/size = 0.0
+
+[node name="Shader" type="CanvasLayer"]
+
+[node name="ShaderRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fulsm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_xvsy8")
+metadata/_edit_use_anchors_ = true

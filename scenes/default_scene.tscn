@@ -1,15 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcehihmytbdiv"]
+[gd_scene load_steps=4 format=3 uid="uid://dcehihmytbdiv"]
 
 [ext_resource type="Script" uid="uid://8gtxpiete45" path="res://scripts/room.gd" id="1_fh1ba"]
 [ext_resource type="Script" uid="uid://cwqbv1qlxqfqc" path="res://scripts/exit.gd" id="2_bqlq0"]
-[ext_resource type="Script" uid="uid://b24ivokgh0wnq" path="res://scripts/parallax.gd" id="3_kedl7"]
-[ext_resource type="Shader" uid="uid://dsgk4bqh6mfic" path="res://shader/black_gradient.gdshader" id="4_ksgdq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dryon"]
 size = Vector2(222.5, 190)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1hoc"]
-shader = ExtResource("4_ksgdq")
 
 [node name="scene" type="Node2D" groups=["room"]]
 script = ExtResource("1_fh1ba")
@@ -48,56 +43,10 @@ shape = SubResource("RectangleShape2D_dryon")
 debug_color = Color(0.7, 0.326667, 0, 0)
 metadata/_edit_lock_ = true
 
-[node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-modulate = Color(0.25, 0.25, 0.25, 1)
-position = Vector2(519.853, -53.5043)
-scale = Vector2(0.6, 0.6)
-script = ExtResource("3_kedl7")
-size = 0.6
-layer = -3
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(259.926, -26.7522)
-scale = Vector2(0.8, 0.8)
-script = ExtResource("3_kedl7")
-size = 0.8
-layer = -1
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="mainlayer" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-script = ExtResource("3_kedl7")
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-51.9852, 5.35043)
-scale = Vector2(1.04, 1.04)
-script = ExtResource("3_kedl7")
-size = 1.04
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-12.9963, 1.3376)
-scale = Vector2(1.01, 1.01)
-script = ExtResource("3_kedl7")
-size = 1.01
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-129.963, 13.3761)
-scale = Vector2(1.1, 1.1)
-script = ExtResource("3_kedl7")
-size = 1.1
-metadata/_custom_type_script = "uid://b24ivokgh0wnq"
-
-[node name="ColorRect4" type="ColorRect" parent="black_shade"]
-material = SubResource("ShaderMaterial_a1hoc")
-offset_left = -235.0
-offset_top = -228.0
-offset_right = 221.0
-offset_bottom = 223.0
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 clip_children = 1
 color = Color(0.80704, 0.7663, 0.97, 1)
+
+[node name="DefaultExit" type="Area2D" parent="."]
+script = ExtResource("2_bqlq0")
+metadata/_custom_type_script = "uid://cwqbv1qlxqfqc"

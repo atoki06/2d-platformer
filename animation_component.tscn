@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi888vh6tj44m"]
+
+[ext_resource type="Script" uid="uid://c8ipn56pb1q1" path="res://scenes/player_animations.gd" id="1_bgkxe"]
+
+[node name="PlayerAnimation" type="Sprite2D"]
+scale = Vector2(0.388889, 0.388889)
+script = ExtResource("1_bgkxe")
+metadata/_custom_type_script = "uid://c8ipn56pb1q1"

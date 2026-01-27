@@ -50,8 +50,6 @@ metadata/_edit_lock_ = true
 
 [node name="background_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.25, 0.25, 0.25, 1)
-position = Vector2(353.822, 67.8211)
-scale = Vector2(0.6, 0.6)
 script = ExtResource("3_dtfch")
 size = 0.6
 layer = -3
@@ -59,8 +57,6 @@ metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="background_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
 modulate = Color(0.5, 0.5, 0.5, 1)
-position = Vector2(176.911, 33.9105)
-scale = Vector2(0.8, 0.8)
 script = ExtResource("3_dtfch")
 size = 0.8
 layer = -1
@@ -71,22 +67,16 @@ script = ExtResource("3_dtfch")
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="forground_1" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-35.3821, -6.7821)
-scale = Vector2(1.04, 1.04)
 script = ExtResource("3_dtfch")
 size = 1.04
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="forground_2" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-8.84552, -1.69553)
-scale = Vector2(1.01, 1.01)
 script = ExtResource("3_dtfch")
 size = 1.01
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"
 
 [node name="black_shade" type="Node2D" parent="." groups=["2d_sprites", "parallax", "sprite_layer"]]
-position = Vector2(-88.4554, -16.9553)
-scale = Vector2(1.1, 1.1)
 script = ExtResource("3_dtfch")
 size = 1.1
 metadata/_custom_type_script = "uid://b24ivokgh0wnq"

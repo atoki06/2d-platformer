@@ -17,24 +17,32 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DebugText="*res://scripts/debug_text.gd"
-Debug="*res://scripts/debug.gd"
 SceneSwitch="*res://scripts/scene_switch.gd"
 Global="*res://scripts/global.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=2
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
+window/size/mode=1
+window/size/borderless=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dublicate_unique/plugin.cfg", "res://addons/scene_editor/plugin.cfg", "res://addons/script-ide-master/addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/dublicate_unique/plugin.cfg", "res://addons/filesystem_drawer/plugin.cfg", "res://addons/kenyoni/plugin_reloader/plugin.cfg", "res://addons/scene_editor/plugin.cfg", "res://addons/script-ide-master/addons/script-ide/plugin.cfg")
 
 [global_group]
 
 room=""
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
