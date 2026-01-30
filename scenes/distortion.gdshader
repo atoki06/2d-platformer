@@ -52,7 +52,7 @@ vec3 get_color(float _size) {
 void fragment() {
 	screen_uv = SCREEN_UV;
 	ratio = vec2(1.0,SCREEN_PIXEL_SIZE.x/SCREEN_PIXEL_SIZE.y);
-	COLOR = vec4(vec3(get_color(0.99).r,get_color(1.0).gb),1.0);
+	COLOR = vec4(vec3(get_color(0.995).r,get_color(1.0).gb),1.0);
 }
 
 

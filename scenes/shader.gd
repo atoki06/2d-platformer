@@ -3,7 +3,7 @@ extends ColorRect
 var target : float = 0.0
 
 func _ready() -> void:
-	show()
+	#show()
 	
 	Global.player_pos.connect(change_player_pos)
 	Global.black_screen.connect(black_screen)
